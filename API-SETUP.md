@@ -1,0 +1,1 @@
+GM Electronics API: Express + PostgreSQL. Proyecto en preparación; el catálogo se valida antes de publicar. No incluye credenciales locales.

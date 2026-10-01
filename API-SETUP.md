@@ -1,1 +1,1 @@
-API Express completa. Ver README.md y docs/API.md. Despliegue pendiente de habilitar el plan de Railway.
+API publicada y verificada: https://gm-electronics-api.onrender.com. Express en Render y PostgreSQL en Neon. Ver README.md y docs/API.md.

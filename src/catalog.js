@@ -42,9 +42,14 @@ export class Catalog {
     const conditions = ['p.active'];
     const bind = value => { params.push(value); return '$' + params.length; };
     if (q) {
-      const value = bind(q.replace(/[\\%_]/g, '\\$&'));
-      conditions.push(`(p.name ILIKE '%' || ${value} || '%' OR p.description ILIKE '%' || ${value} || '%' OR c.name ILIKE '%' || ${value} || '%' OR EXISTS
-        (SELECT 1 FROM gm.product_variants code WHERE code.product_id=p.id AND code.supplier_code=${value}))`);
+      const code = normalizeCodeQuery(q);
+      if (code) {
+        const value = bind(code);
+        conditions.push(`EXISTS (SELECT 1 FROM gm.product_variants code WHERE code.product_id=p.id AND code.supplier_code=${value})`);
+      } else {
+        const value = bind(q.replace(/[\\%_]/g, '\\$&'));
+        conditions.push(`(p.name ILIKE '%' || ${value} || '%' OR p.description ILIKE '%' || ${value} || '%' OR c.name ILIKE '%' || ${value} || '%')`);
+      }
     }
     if (category) { const value=bind(category); conditions.push(`(c.name=${value} OR c.id::text=${value})`); }
     if (availability) conditions.push(`availability.supplier_available IS ${availability === 'available' ? 'TRUE' : availability === 'unavailable' ? 'FALSE' : availability === 'consult' ? 'NOT TRUE' : 'NULL'}`);
@@ -75,11 +80,12 @@ export class Catalog {
     return rows[0] || null;
   }
   async variant(id) {
+    const lookup = normalizeCodeQuery(id) || id;
     const { rows } = await this.pool.query(`SELECT p.source_id FROM gm.product_variants v
-      JOIN gm.products p ON p.id=v.product_id WHERE p.active AND (v.id::text=$1 OR v.supplier_code=$1)`, [id]);
+      JOIN gm.products p ON p.id=v.product_id WHERE p.active AND (v.id::text=$1 OR v.supplier_code=$1)`, [lookup]);
     if (!rows.length) return null;
     const product = await this.product(rows[0].source_id);
-    return { product_id: product.id, ...product.variantes.find(v => v.api_id===id || v.codigo===id) };
+    return { product_id: product.id, ...product.variantes.find(v => v.api_id===id || normalizeCodeQuery(v.codigo)===lookup) };
   }
 }
 
@@ -96,7 +102,7 @@ export function serializeProduct(product, { assetUrl, prices }) {
     imagen: product.imagen ? assetUrl(product.imagen) : null,
     precio_pesos: prices ? reference?.precio_pesos ?? null : null,
     precio_usd: prices ? reference?.precio_usd ?? null : null,
-    precio_codigo_referencia: prices ? reference?.codigo ?? null : null,
+    precio_codigo_referencia: prices && reference ? formatSupplierCode(reference.codigo) : null,
     precio_es_desde: prices && new Set(product.variantes.map(v => v.precio_pesos).filter(v => v!==null)).size>1,
     precios_completos: prices && product.variantes.every(v => v.precio_pesos!==null && v.precio_usd!==null),
     origen_precio: prices ? 'lista_proveedor' : null,
@@ -104,7 +110,19 @@ export function serializeProduct(product, { assetUrl, prices }) {
   };
 }
 export function serializeVariant(variant, { assetUrl, prices }) {
-  return { ...variant, precio_pesos: prices ? variant.precio_pesos : null,
+  return { ...variant, codigo: formatSupplierCode(variant.codigo), precio_pesos: prices ? variant.precio_pesos : null,
     precio_usd: prices ? variant.precio_usd : null, imagenes: variant.imagenes.map(assetUrl) };
 }
+
+export function normalizeCodeQuery(value) {
+  const query=String(value ?? '').trim();
+  if (!/^\d{1,4}$/.test(query)) return null;
+  return String(Number(query));
+}
+
+export function formatSupplierCode(value) {
+  const code=String(value ?? '').trim();
+  return /^\d{1,4}$/.test(code) ? code.padStart(4,'0') : code;
+}
+
 

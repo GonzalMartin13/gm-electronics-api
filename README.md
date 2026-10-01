@@ -1,11 +1,11 @@
 # GM Electronics
 
-API Express publicada en https://gm-electronics-api.onrender.com, conectada a PostgreSQL en Neon. Siete pruebas locales y una comprobación del dominio público verifican los 694 productos y 834 variantes, sus precios del Excel, stock e imágenes.
+API Express publicada en https://gm-electronics-api.onrender.com, conectada a PostgreSQL en Neon. Diez pruebas locales y una comprobación del dominio público verifican los 694 productos y 834 variantes, sus precios del Excel, stock e imágenes.
 
 ## Qué guarda la base
 
 - 694 productos y 834 variantes del JSON maestro.
-- Precios Excel y disponibilidad por color: 569 disponibles, 211 sin stock y 54 desconocidas.
+- Precios Excel y disponibilidad por color: 569 con disponibilidad confirmada, 211 marcadas en amarillo y 54 sin confirmar.
 - 13 categorías, referencias a 2.838 imágenes y evidencia de los 883 bloques del Excel.
 - Historial por lista del proveedor, para que una nueva importación no borre lo anterior.
 
@@ -63,3 +63,6 @@ En Render gratuito, el servicio se suspende después de 15 minutos sin consultas
 
 No se empezó la web ni se conectó la lista futura de Drive. El próximo paso es integrar la página con los endpoints documentados; para la importación semanal faltan el archivo y el enlace de Drive.
 
+
+
+Las funciones de pedidos y los filtros añadidos están documentados en [docs/ORDERS.md](docs/ORDERS.md). Las opciones amarillas o sin confirmar se presentan como Consultar disponibilidad; los precios ausentes como Consultar precio.

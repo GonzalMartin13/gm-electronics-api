@@ -1,0 +1,7 @@
+node_modules
+.local
+.env
+.env.local
+.env.*.local
+.git
+test

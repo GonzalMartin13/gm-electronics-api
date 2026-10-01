@@ -1,0 +1,26 @@
+{
+  "name": "gm-electronics-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test --test-isolation=none --test-concurrency=1 test/*.test.js",
+    "db:migrate": "node scripts/migrate.js",
+    "db:seed": "node scripts/load-seed.js",
+    "check": "node --check src/app.js && node --check src/server.js"
+  },
+  "dependencies": {
+    "adm-zip": "^0.6.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.0",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.0.0",
+    "helmet": "^8.1.0",
+    "pg": "^8.16.0"
+  }
+}

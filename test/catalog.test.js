@@ -1,0 +1,25 @@
+import {test,after,before} from 'node:test';
+import assert from 'node:assert/strict';
+import {once} from 'node:events';
+import {readFile} from 'node:fs/promises';
+import {gunzipSync} from 'node:zlib';
+import {createApp} from '../src/app.js';
+import {Catalog} from '../src/catalog.js';
+import {makePool,config} from '../src/config.js';
+const pool=makePool(); let server,base;
+before(async()=>{server=createApp({catalog:new Catalog(pool),config:{...config,adminKey:'test-secret',exposeSupplierPrices:true}}).listen(0,'127.0.0.1');await once(server,'listening');base=`http://127.0.0.1:${server.address().port}`;});
+after(async()=>{await new Promise(r=>server.close(r));await pool.end();});
+async function get(path,options){const response=await fetch(base+path,options);return {response,body:await response.json()};}
+test('published database is ready and contains the audited catalog',async()=>{const {response,body}=await get('/ready');assert.equal(response.status,200);assert.equal(body.productos,694);assert.equal(body.variantes,834);assert.equal((await get('/api/v1/categories')).body.data.length,13);});
+test('all products and variants match JSON, stock and updated Excel prices',async()=>{
+ const expected=JSON.parse(gunzipSync(Buffer.from(await readFile(new URL('../data/catalog-check.json.gz.b64',import.meta.url),'utf8'),'base64')).toString('utf8'));
+ const actual=[];for(let page=1;page<=7;page++){const {body}=await get(`/api/v1/products?limit=100&page=${page}`);assert.equal(body.pagination.total,694);actual.push(...body.data);}
+ assert.equal(new Set(actual.map(p=>p.id)).size,694);
+ for(const original of expected){const product=actual.find(p=>String(p.id)===String(original.id));assert.ok(product);assert.equal(product.nombre,original.nombre);assert.equal(product.stock_disponible,original.stock_disponible);
+ for(const v of original.variantes){const actualVariant=product.variantes.find(a=>a.codigo===String(v.codigo));assert.ok(actualVariant);assert.equal(actualVariant.stock_disponible,v.stock_disponible);assert.equal(actualVariant.precio_pesos===null?null:Number(actualVariant.precio_pesos),v.precio_pesos===null?null:Number(v.precio_pesos));assert.equal(actualVariant.precio_usd===null?null:Number(actualVariant.precio_usd),v.precio_usd===null?null:Number(v.precio_usd));}}
+});
+test('green, yellow, unknown and code conflicts stay distinct',async()=>{assert.equal((await get('/api/v1/variants/1404')).body.data.stock_disponible,true);assert.equal((await get('/api/v1/variants/1405')).body.data.stock_disponible,false);const conflict=(await get('/api/v1/variants/2362')).body.data;assert.equal(conflict.stock_disponible,null);assert.equal(conflict.precio_pesos,null);assert.equal((await get('/api/v1/variants/765')).body.data.precio_pesos,'3661.00');});
+test('invalid queries and injection cannot change the database',async()=>{for(const query of ['limit=101','page=0','q=a&q=b','availability=yes','min_price=-1','min_price=10&max_price=1','extra=x'])assert.equal((await get('/api/v1/products?'+query)).response.status,400);assert.equal((await get('/api/v1/products?q='+encodeURIComponent("'; DROP TABLE gm.products; --"))).body.pagination.total,0);const literal=await pool.query("SELECT count(*)::int AS total FROM gm.products WHERE name LIKE '%\\%%' OR description LIKE '%\\%%'");assert.equal((await get('/api/v1/products?q=%25')).body.pagination.total,literal.rows[0].total);assert.equal((await get('/api/v1/products/no-such-id')).response.status,404);});
+test('admin key is mandatory and private responses are never cached',async()=>{assert.equal((await get('/api/v1/admin/products')).response.status,401);const result=await get('/api/v1/admin/products',{headers:{'x-api-key':'test-secret'}});assert.equal(result.response.status,200);assert.equal(result.response.headers.get('cache-control'),'no-store');});
+test('actual catalog images can be fetched from returned URLs',async()=>{const {body}=await get('/api/v1/products?limit=100');const product=body.data.find(p=>p.imagen);const response=await fetch(product.imagen);assert.equal(response.status,200);assert.equal(response.headers.get('content-type'),'image/jpeg');const bytes=new Uint8Array(await response.arrayBuffer());assert.equal(bytes[0],255);assert.equal(bytes[1],216);assert.equal((await get('/images/missing.jpg')).response.status,404);});
+test('availability filters return only matching aggregate states',async()=>{for(const [filter,value]of [['available',true],['unavailable',false],['unknown',null]]){const {body}=await get('/api/v1/products?limit=100&availability='+filter);assert.ok(body.data.length);assert.ok(body.data.every(p=>p.stock_disponible===value));}});

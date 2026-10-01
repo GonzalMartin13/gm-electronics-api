@@ -1,1 +1,1 @@
-GM Electronics API: Express + PostgreSQL. Proyecto en preparación; el catálogo se valida antes de publicar. No incluye credenciales locales.
+API Express completa. Ver README.md y docs/API.md. Despliegue pendiente de habilitar el plan de Railway.

@@ -1,4 +1,5 @@
 import {createHash,timingSafeEqual,randomUUID} from 'node:crypto';
+import {formatSupplierCode} from './catalog.js';
 const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const hash=value=>createHash('sha256').update(value).digest('hex');
 export class OrderError extends Error{constructor(message,status=400,code='INVALID_ORDER',details){super(message);Object.assign(this,{status,code,details})}}
@@ -17,7 +18,7 @@ export function orderInput(body,{customer=false}={}){
 export function cents(value){if(typeof value!=='string'||!/^\d{1,12}[.]\d{2}$/.test(value))throw new OrderError('Consultar precio.',409,'PRICE_REQUIRES_CONSULTATION');return BigInt(value.replace('.',''))}
 export function amount(value){return (value/100n).toString()+'.'+(value%100n).toString().padStart(2,'0')}
 export function calculateQuote(input,rows){
- const byId=new Map(rows.map(row=>[row.variant_id,row]));let subtotal=0n;const issues=[];const items=input.items.map(item=>{const v=byId.get(item.variant_id);if(!v||v.supplier_available!==true||v.supplier_price_ars===null){issues.push({variant_id:item.variant_id,message:!v||v.supplier_available!==true?'Consultar disponibilidad':'Consultar precio'});return null}const unit=cents(v.supplier_price_ars);if(unit<=0n){issues.push({variant_id:item.variant_id,message:'Consultar precio'});return null}const total=unit*BigInt(item.quantity);subtotal+=total;return {variant_id:v.variant_id,product_id:v.source_id,nombre:v.name,codigo:v.supplier_code,color:v.color,embalaje:v.packaging_original,qty:item.quantity,precio_pesos:v.supplier_price_ars,importe:amount(total),fecha_lista:v.document_date,batch_id:v.batch_id}});
+ const byId=new Map(rows.map(row=>[row.variant_id,row]));let subtotal=0n;const issues=[];const items=input.items.map(item=>{const v=byId.get(item.variant_id);if(!v||v.supplier_available!==true||v.supplier_price_ars===null){issues.push({variant_id:item.variant_id,message:!v||v.supplier_available!==true?'Consultar disponibilidad':'Consultar precio'});return null}const unit=cents(v.supplier_price_ars);if(unit<=0n){issues.push({variant_id:item.variant_id,message:'Consultar precio'});return null}const total=unit*BigInt(item.quantity);subtotal+=total;return {variant_id:v.variant_id,product_id:v.source_id,nombre:v.name,codigo:formatSupplierCode(v.supplier_code),color:v.color,embalaje:v.packaging_original,qty:item.quantity,precio_pesos:v.supplier_price_ars,importe:amount(total),fecha_lista:v.document_date,batch_id:v.batch_id}});
  if(issues.length)throw new OrderError('Algunos artículos requieren consulta. Podés consultarnos por WhatsApp.',409,'CONSULTATION_REQUIRED',{issues});
  const tax=input.invoice?(subtotal*21n+50n)/100n:0n;const total=subtotal+tax;
  if(total>99999999999999n)throw new OrderError('Consultanos para preparar este pedido.');
@@ -41,3 +42,4 @@ export class Orders{
  }
  async get(id,token){if(!UUID.test(id)||!UUID.test(token))throw new OrderError('Acceso al pedido no válido.',404,'ORDER_NOT_FOUND');const {rows}=await this.pool.query('SELECT * FROM gm.orders WHERE id=$1',[id]);if(!rows.length||!timingSafeEqual(Buffer.from(rows[0].access_token_hash,'hex'),Buffer.from(hash(token),'hex')))throw new OrderError('Acceso al pedido no válido.',404,'ORDER_NOT_FOUND');return publicOrder(rows[0])}
 }
+

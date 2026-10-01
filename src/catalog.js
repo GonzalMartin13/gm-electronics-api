@@ -37,23 +37,23 @@ export class Catalog {
       GROUP BY c.id ORDER BY c.name`);
     return rows;
   }
-  async list({ page, limit, q, category, availability, minPrice, maxPrice }) {
+  async list({ page, limit, q, category, availability, minPrice, maxPrice, sort }) {
     const params = [];
     const conditions = ['p.active'];
     const bind = value => { params.push(value); return '$' + params.length; };
     if (q) {
       const value = bind(q.replace(/[\\%_]/g, '\\$&'));
-      conditions.push(`(p.name ILIKE '%' || ${value} || '%' OR p.description ILIKE '%' || ${value} || '%' OR EXISTS
+      conditions.push(`(p.name ILIKE '%' || ${value} || '%' OR p.description ILIKE '%' || ${value} || '%' OR c.name ILIKE '%' || ${value} || '%' OR EXISTS
         (SELECT 1 FROM gm.product_variants code WHERE code.product_id=p.id AND code.supplier_code=${value}))`);
     }
     if (category) { const value=bind(category); conditions.push(`(c.name=${value} OR c.id::text=${value})`); }
-    if (availability) conditions.push(`availability.supplier_available IS ${availability === 'available' ? 'TRUE' : availability === 'unavailable' ? 'FALSE' : 'NULL'}`);
+    if (availability) conditions.push(`availability.supplier_available IS ${availability === 'available' ? 'TRUE' : availability === 'unavailable' ? 'FALSE' : availability === 'consult' ? 'NOT TRUE' : 'NULL'}`);
     // When filtering price and stock, require that the SAME variant satisfies both.
     if (minPrice !== undefined || maxPrice !== undefined) {
       const variantWhere = ['priced.product_id=p.id'];
       if (minPrice !== undefined) variantWhere.push(`priced.supplier_price_ars >= ${bind(minPrice)}::numeric`);
       if (maxPrice !== undefined) variantWhere.push(`priced.supplier_price_ars <= ${bind(maxPrice)}::numeric`);
-      if (availability) variantWhere.push(`priced.supplier_available IS ${availability === 'available' ? 'TRUE' : availability === 'unavailable' ? 'FALSE' : 'NULL'}`);
+      if (availability) variantWhere.push(`priced.supplier_available IS ${availability === 'available' ? 'TRUE' : availability === 'unavailable' ? 'FALSE' : availability === 'consult' ? 'NOT TRUE' : 'NULL'}`);
       conditions.push(`EXISTS (SELECT 1 FROM gm.current_variant_state priced WHERE ${variantWhere.join(' AND ')})`);
     }
     const where=' WHERE '+conditions.join(' AND ');
@@ -62,7 +62,9 @@ export class Catalog {
       await client.query('BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY');
       const { rows: count } = await client.query(`SELECT count(*)::int AS total FROM gm.products p
         JOIN gm.categories c ON c.id=p.category_id JOIN gm.current_product_availability availability ON availability.product_id=p.id ${where}`, params);
-      const { rows } = await client.query(productSelect+where+` ORDER BY p.source_id LIMIT $${params.length+1} OFFSET $${params.length+2}`, [...params,limit,(page-1)*limit]);
+      const sortPrice=`coalesce((SELECT min(s.supplier_price_ars) FROM gm.current_variant_state s WHERE s.product_id=p.id AND s.supplier_available IS TRUE),(SELECT min(s.supplier_price_ars) FROM gm.current_variant_state s WHERE s.product_id=p.id))`;
+      const order=sort==='priceAsc'?sortPrice+' ASC NULLS LAST, p.source_id':sort==='priceDesc'?sortPrice+' DESC NULLS LAST, p.source_id':'p.source_id';
+      const { rows } = await client.query(productSelect+where+` ORDER BY ${order} LIMIT $${params.length+1} OFFSET $${params.length+2}`, [...params,limit,(page-1)*limit]);
       await client.query('COMMIT');
       return { data: rows, pagination: { page, limit, total: count[0].total, pages: Math.ceil(count[0].total/limit) } };
     } catch (error) { await client.query('ROLLBACK'); throw error; }
@@ -105,3 +107,4 @@ export function serializeVariant(variant, { assetUrl, prices }) {
   return { ...variant, precio_pesos: prices ? variant.precio_pesos : null,
     precio_usd: prices ? variant.precio_usd : null, imagenes: variant.imagenes.map(assetUrl) };
 }
+

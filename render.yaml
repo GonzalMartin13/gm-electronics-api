@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: gm-electronics-api
+    runtime: node
+    plan: free
+    region: ohio
+    repo: https://github.com/GonzalMartin13/gm-electronics-api
+    branch: main
+    buildCommand: npm ci --omit=dev --ignore-scripts --no-fund && node scripts/prepare-images.js
+    startCommand: node scripts/start-hosted.js
+    healthCheckPath: /ready
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 24.15.0
+      - key: EXPOSE_SUPPLIER_PRICES
+        value: "true"
+      - key: TRUST_PROXY_HOPS
+        value: "1"
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_URL_UNPOOLED
+        sync: false
+      - key: CORS_ORIGINS
+        value: "*"
+

@@ -6,14 +6,14 @@ dotenv.config({ path: fileURLToPath(new URL('../.env.local', import.meta.url)), 
 dotenv.config({ path: fileURLToPath(new URL('../.env', import.meta.url)), quiet: true });
 
 export function makePool({ admin = false } = {}) {
-  const connectionString = admin ? process.env.DATABASE_ADMIN_URL || process.env.DATABASE_URL : process.env.DATABASE_URL;
+  const connectionString = admin ? process.env.DATABASE_ADMIN_URL || process.env.DATABASE_URL_UNPOOLED || process.env.DATABASE_URL : process.env.DATABASE_URL;
   const sslMode = process.env.PGSSLMODE;
   const options = {
     ...(connectionString ? { connectionString } : {}),
     max: Number(process.env.PGPOOL_MAX || 5),
     connectionTimeoutMillis: 5000,
     idleTimeoutMillis: 10000,
-    statement_timeout: 10000,
+    statement_timeout: admin ? 120000 : 10000,
     application_name: admin ? 'gm-electronics-migrations' : 'gm-electronics-api',
   };
   if (sslMode === 'require' || sslMode === 'verify-full') options.ssl = { rejectUnauthorized: true };
@@ -29,3 +29,4 @@ export const config = {
   adminKey: process.env.ADMIN_API_KEY || '',
   exposeSupplierPrices: process.env.EXPOSE_SUPPLIER_PRICES !== 'false',
 };
+

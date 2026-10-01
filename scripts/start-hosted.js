@@ -5,4 +5,5 @@ if(process.exitCode)process.exit(process.exitCode);
 await import('./load-seed.js');
 if(process.exitCode)process.exit(process.exitCode);
 await import('../src/server.js');
+await import('./verify-deployed.js');
 

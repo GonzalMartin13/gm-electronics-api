@@ -15,18 +15,20 @@ async function verify() {
  };
  let status='failed';
  try {
-  const ready=await get('/ready');assert.equal(ready.productos,694);assert.equal(ready.variantes,834);report.checks.push('public_https_ready');
   const expected=JSON.parse(gunzipSync(Buffer.from(await readFile(new URL('../data/catalog-check.json.gz.b64',import.meta.url),'utf8'),'base64')).toString('utf8'));
+  const expectedVariants=expected.reduce((n,p)=>n+p.variantes.length,0);
+  const ready=await get('/ready');assert.equal(ready.productos,expected.length);assert.equal(ready.variantes,expectedVariants);report.checks.push('public_https_ready');
+
   const products=[];
-  for(let page=1;page<=7;page++){
-   const result=await get(`/api/v1/products?limit=100&page=${page}`);assert.equal(result.pagination.total,694);products.push(...result.data);
+  for(let page=1;page<=Math.ceil(expected.length/100);page++){
+   const result=await get(`/api/v1/products?limit=100&page=${page}`);assert.equal(result.pagination.total,expected.length);products.push(...result.data);
   }
-  assert.equal(new Set(products.map(p=>p.id)).size,694);
+  assert.equal(new Set(products.map(p=>p.id)).size,expected.length);
   for(const original of expected){
    const actual=products.find(p=>String(p.id)===String(original.id));assert.ok(actual);assert.equal(actual.nombre,original.nombre);assert.equal(actual.stock_disponible,original.stock_disponible);
-   for(const variant of original.variantes){const v=actual.variantes.find(v=>v.codigo===String(variant.codigo));assert.ok(v);assert.equal(v.stock_disponible,variant.stock_disponible);assert.equal(v.precio_pesos===null?null:Number(v.precio_pesos),variant.precio_pesos===null?null:Number(variant.precio_pesos));assert.equal(v.precio_usd===null?null:Number(v.precio_usd),variant.precio_usd===null?null:Number(variant.precio_usd));}
+   for(const variant of original.variantes){const v=actual.variantes.find(v=>v.codigo===String(variant.codigo).padStart(4,'0'));assert.ok(v);assert.equal(v.stock_disponible,variant.stock_disponible);assert.equal(v.precio_pesos===null?null:Number(v.precio_pesos),variant.precio_pesos===null?null:Number(variant.precio_pesos));assert.equal(v.precio_usd===null?null:Number(v.precio_usd),variant.precio_usd===null?null:Number(variant.precio_usd));}
   }
-  report.products=products.length;report.variants=products.reduce((n,p)=>n+p.variantes.length,0);assert.equal(report.variants,834);report.checks.push('all_products_variants_prices_stock');
+  report.products=products.length;report.variants=products.reduce((n,p)=>n+p.variantes.length,0);assert.equal(report.variants,expectedVariants);report.checks.push('all_products_variants_prices_stock');
   assert.equal((await get('/api/v1/categories')).data.length,13);report.checks.push('categories');
   assert.equal((await get('/api/v1/variants/765')).data.precio_pesos,'3661.00');assert.equal((await get('/api/v1/variants/2362')).data.stock_disponible,null);report.checks.push('updated_price_and_conflict');
   const manifest=JSON.parse(await readFile(new URL('../data/image-manifest.json',import.meta.url),'utf8'));

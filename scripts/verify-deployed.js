@@ -1,3 +1,4 @@
+import {excludedImagePaths,isExcludedImage} from '../src/photo-review.js';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
@@ -35,6 +36,10 @@ async function verify() {
   const imageUrls=[products.find(p=>p.imagen).imagen,products.flatMap(p=>p.variantes).find(v=>v.imagenes.length).imagenes[0]];
   for(const imageUrl of imageUrls){const response=await fetch(imageUrl,{signal:AbortSignal.timeout(15000)});assert.equal(response.status,200);const bytes=Buffer.from(await response.arrayBuffer());const path=decodeURIComponent(new URL(imageUrl).pathname.slice(1));assert.equal(createHash('sha256').update(bytes).digest('hex'),manifest[path]);}
   report.checks.push('public_images_sha256');
+  const pathsOf=p=>[p.imagen,...p.variantes.flatMap(v=>v.imagenes)].filter(Boolean).map(url=>decodeURIComponent(new URL(url).pathname.slice(1)));
+  assert.ok(products.every(p=>pathsOf(p).every(path=>!isExcludedImage(path))),'Removed image still in catalog');
+  for(const path of [excludedImagePaths[0],excludedImagePaths.at(-1)]){const removed=await fetch(base+'/'+path,{signal:AbortSignal.timeout(15000)});assert.equal(removed.status,404);}
+  report.removed_images=excludedImagePaths.length;report.checks.push('reviewed_images_removed');
   const invalid=await fetch(base+'/api/v1/products?limit=101',{signal:AbortSignal.timeout(15000)});assert.equal(invalid.status,400);
   const missing=await fetch(base+'/api/v1/products/no-such-product',{signal:AbortSignal.timeout(15000)});assert.equal(missing.status,404);report.checks.push('invalid_query_and_missing_product');
   status='passed';

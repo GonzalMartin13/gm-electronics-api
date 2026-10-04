@@ -1,3 +1,4 @@
+import {isExcludedImage} from '../src/photo-review.js';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import AdmZip from 'adm-zip';
@@ -7,10 +8,12 @@ const response=await fetch(`https://codeload.github.com/GonzalMartin13/gm-electr
 if(!response.ok)throw new Error('Image source download failed');
 const zip=new AdmZip(Buffer.from(await response.arrayBuffer()));
 const entries=new Map(zip.getEntries().map(e=>[e.entryName.split('/').slice(1).join('/'),e]));
+let prepared=0;
 for(const [path,sha]of Object.entries(manifest)){
+ if(isExcludedImage(path))continue;
  if(!path.startsWith('images/') || path.includes('\\') || path.split('/').some(segment=>!segment || segment==='.' || segment==='..'))throw new Error('Invalid image path');
  const entry=entries.get(path);if(!entry)throw new Error('Missing image: '+path);
  const bytes=entry.getData();if(createHash('sha256').update(bytes).digest('hex')!==sha)throw new Error('Image checksum mismatch: '+path);
- const destination=new URL('../public/'+path,import.meta.url);await mkdir(new URL('.',destination),{recursive:true});await writeFile(destination,bytes);
+ const destination=new URL('../public/'+path,import.meta.url);await mkdir(new URL('.',destination),{recursive:true});await writeFile(destination,bytes);prepared++;
 }
-console.log('Verified images prepared:',Object.keys(manifest).length);
+console.log('Verified images prepared:',prepared);

@@ -1,3 +1,4 @@
+import {isExcludedImage,visibleImages} from './photo-review.js';
 // Query only the published supplier batch. Never use historical JSON prices as a fallback.
 const productSelect = `
  SELECT p.id AS api_id, p.source_id AS id, p.name AS nombre,
@@ -99,7 +100,7 @@ export function serializeProduct(product, { assetUrl, prices }) {
   const reference=smallestPrice(product.variantes);
   return {
     ...product,
-    imagen: product.imagen ? assetUrl(product.imagen) : null,
+    imagen: product.imagen && !isExcludedImage(product.imagen) ? assetUrl(product.imagen) : null,
     precio_pesos: prices ? reference?.precio_pesos ?? null : null,
     precio_usd: prices ? reference?.precio_usd ?? null : null,
     precio_codigo_referencia: prices && reference ? formatSupplierCode(reference.codigo) : null,
@@ -111,7 +112,7 @@ export function serializeProduct(product, { assetUrl, prices }) {
 }
 export function serializeVariant(variant, { assetUrl, prices }) {
   return { ...variant, codigo: formatSupplierCode(variant.codigo), precio_pesos: prices ? variant.precio_pesos : null,
-    precio_usd: prices ? variant.precio_usd : null, imagenes: variant.imagenes.map(assetUrl) };
+    precio_usd: prices ? variant.precio_usd : null, imagenes: visibleImages(variant.imagenes).map(assetUrl) };
 }
 
 export function normalizeCodeQuery(value) {

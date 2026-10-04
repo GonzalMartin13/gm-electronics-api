@@ -1,3 +1,4 @@
+import {isExcludedImage} from './photo-review.js';
 import express from 'express';
 import {Orders,OrderError} from './orders.js';
 import cors from 'cors';
@@ -52,6 +53,11 @@ export function createApp({ catalog, config, logger=console, orders=new Orders(c
     if (!origin || config.corsOrigins.includes('*') || config.corsOrigins.includes(origin)) return done(null,true);
     return done(null,false);
   }, credentials:false, methods:['GET','HEAD','OPTIONS','POST'] }));
+  app.use('/images',(req,res,next)=>{
+    let path;try{path='images'+decodeURIComponent(req.path)}catch{return res.status(400).json({error:{code:'INVALID_IMAGE',message:'Ruta de imagen inválida'}})}
+    if(isExcludedImage(path)){res.set('Cache-Control','no-store');return res.status(404).json({error:{code:'NOT_FOUND',message:'Imagen retirada del catálogo'}})}
+    next();
+  });
   app.use('/images',express.static(fileURLToPath(new URL('../public/images',import.meta.url)),{dotfiles:'deny',index:false,maxAge:'1d',fallthrough:false}));
   app.get('/health',(_req,res)=>res.json({status:'ok',service:'gm-electronics-api'}));
   app.get('/ready',async (_req,res)=>{

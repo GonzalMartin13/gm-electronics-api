@@ -28,5 +28,6 @@ export const config = {
   corsOrigins: (process.env.CORS_ORIGINS || '*').split(',').map(x => x.trim()).filter(Boolean),
   adminKey: process.env.ADMIN_API_KEY || '',
   exposeSupplierPrices: process.env.EXPOSE_SUPPLIER_PRICES !== 'false',
+  // Public project endpoint; credentials remain managed by Neon.
+  authBaseUrl: process.env.NEON_AUTH_BASE_URL ?? 'https://ep-icy-shadow-b49pll5g.neonauth.c-6.us-east-2.aws.neon.tech/neondb/auth',
 };
-

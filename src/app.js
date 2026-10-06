@@ -1,6 +1,7 @@
 import {isExcludedImage} from './photo-review.js';
 import express from 'express';
 import {Orders,OrderError} from './orders.js';
+import {Accounts,createIdentityVerifier} from './accounts.js';
 import cors from 'cors';
 import helmet from 'helmet';
 import { rateLimit } from 'express-rate-limit';
@@ -42,7 +43,7 @@ function safeKey(value,expected) {
   return a.length===b.length && timingSafeEqual(a,b);
 }
 
-export function createApp({ catalog, config, logger=console, orders=new Orders(catalog.pool) }) {
+export function createApp({ catalog, config, logger=console, orders=new Orders(catalog.pool), accounts=new Accounts(catalog.pool), verifyIdentity=createIdentityVerifier(config.authBaseUrl) }) {
   const app=express();
   app.disable('x-powered-by');
   app.set('query parser','simple');
@@ -69,8 +70,22 @@ export function createApp({ catalog, config, logger=console, orders=new Orders(c
   app.use('/api',rateLimit({windowMs:60000,limit:120,standardHeaders:'draft-8',legacyHeaders:false,message:{error:{code:'RATE_LIMITED',message:'Demasiadas consultas; intentá nuevamente en un minuto'}}}));
   app.use('/api/v1/orders',(req,_res,next)=>{if(req.method==='POST'&&!config.exposeSupplierPrices)return next(new OrderError('Consultanos para preparar tu pedido.',503,'PRICING_NOT_ENABLED'));next()},rateLimit({windowMs:60000,limit:20,standardHeaders:'draft-8',legacyHeaders:false,message:{error:{code:'RATE_LIMITED',message:'Esperá un momento para volver a preparar el pedido.'}}}),express.json({limit:'32kb'}),(_req,res,next)=>{res.set('Cache-Control','no-store');next()});
   app.post('/api/v1/orders/quote',async(req,res)=>res.json({data:await orders.quote(req.body)}));
-  app.post('/api/v1/orders',async(req,res)=>{const result=await orders.create(req.body);res.status(result.reused?200:201).json({data:result.order,reused:result.reused})});
+  app.post('/api/v1/orders',async(req,res)=>{
+    let accountId=null;
+    if(req.get('Authorization'))accountId=(await accounts.ensure(await verifyIdentity(req.get('Authorization')))).id;
+    const result=await orders.create(req.body,{accountId});res.status(result.reused?200:201).json({data:result.order,reused:result.reused});
+  });
   app.get('/api/v1/orders/:id',async(req,res)=>res.json({data:await orders.get(req.params.id,req.get('Authorization')?.replace(/^Bearer /,''))}));
+  app.use('/api/v1/me',express.json({limit:'8kb'}),async(req,res,next)=>{
+    res.set('Cache-Control','no-store');
+    req.identity=await verifyIdentity(req.get('Authorization'));
+    req.account=await accounts.ensure(req.identity);
+    next();
+  });
+  app.get('/api/v1/me',async(req,res)=>res.json({data:req.account}));
+  app.post('/api/v1/me',async(req,res)=>res.json({data:await accounts.update(req.identity,req.body)}));
+  app.get('/api/v1/me/orders',async(req,res)=>res.json(await orders.history(req.account.id,{page:positiveInteger(req.query,'page',1,100000),limit:positiveInteger(req.query,'limit',20,50)})));
+  app.get('/api/v1/me/orders/:id',async(req,res)=>res.json({data:await orders.getForAccount(req.params.id,req.account.id)}));
   const metadata = { fuente_stock:'proveedor', moneda_pesos:'ARS', moneda_dolares:'USD' };
   function context(req,prices) {
     const base=config.publicBaseUrl || `${req.protocol}://${req.get('host')}`;

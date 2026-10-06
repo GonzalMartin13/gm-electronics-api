@@ -30,16 +30,28 @@ function publicOrder(row){return {id:row.id,numero:'GM-'+String(row.order_number
 export class Orders{
  constructor(pool){this.pool=pool}
  async quote(body){const input=orderInput(body);const {rows}=await this.pool.query(selectVariants,[input.items.map(row=>row.variant_id)]);return calculateQuote(input,rows)}
- async create(body){
- const input=orderInput(body,{customer:true});const requestHash=hash(JSON.stringify(input));const tokenHash=hash(input.access_token);const client=await this.pool.connect();
+ async create(body,{accountId=null}={}){
+ if(accountId!==null&&!UUID.test(accountId))throw new OrderError('Acceso a la cuenta no válido.',401,'AUTH_REQUIRED');
+ const input=orderInput(body,{customer:true});const requestHash=hash(JSON.stringify(accountId?{...input,accountId}:input));const tokenHash=hash(input.access_token);const client=await this.pool.connect();
  try{await client.query('BEGIN');await client.query('SELECT pg_advisory_xact_lock(hashtextextended($1,0))',[input.idempotency_key]);const existing=await client.query('SELECT * FROM gm.orders WHERE idempotency_key=$1',[input.idempotency_key]);
- if(existing.rows.length){if(existing.rows[0].request_hash!==requestHash)throw new OrderError('Reintentá preparar el pedido con sus datos actuales.',409,'IDEMPOTENCY_CONFLICT');await client.query('COMMIT');return {order:publicOrder(existing.rows[0]),reused:true}}
+ if(existing.rows.length){if((existing.rows[0].customer_account_id||null)!==accountId||existing.rows[0].request_hash!==requestHash)throw new OrderError('Reintentá preparar el pedido con sus datos actuales.',409,'IDEMPOTENCY_CONFLICT');await client.query('COMMIT');return {order:publicOrder(existing.rows[0]),reused:true}}
  await client.query('SELECT id FROM gm.suppliers ORDER BY id FOR SHARE');const {rows}=await client.query(selectVariants,[input.items.map(row=>row.variant_id)]);const quote=calculateQuote(input,rows);
  if(quote.signature!==input.quote_signature)throw new OrderError('La información del pedido cambió. Revisala antes de confirmar.',409,'QUOTE_CHANGED',{quote});
- const saved=await client.query(`INSERT INTO gm.orders(id,idempotency_key,request_hash,access_token_hash,channel,invoice,customer,items,subtotal,tax,total) VALUES($1,$2,$3,$4,$5,$6,$7::jsonb,$8::jsonb,$9,$10,$11) RETURNING *`,[randomUUID(),input.idempotency_key,requestHash,tokenHash,input.channel,input.invoice,JSON.stringify(input.customer),JSON.stringify(quote.items),quote.subtotal,quote.iva,quote.total]);
+ const saved=await client.query(`INSERT INTO gm.orders(id,idempotency_key,request_hash,access_token_hash,channel,invoice,customer,items,subtotal,tax,total,customer_account_id) VALUES($1,$2,$3,$4,$5,$6,$7::jsonb,$8::jsonb,$9,$10,$11,$12) RETURNING *`,[randomUUID(),input.idempotency_key,requestHash,tokenHash,input.channel,input.invoice,JSON.stringify(input.customer),JSON.stringify(quote.items),quote.subtotal,quote.iva,quote.total,accountId]);
  await client.query('COMMIT');return {order:publicOrder(saved.rows[0]),reused:false};
  }catch(error){await client.query('ROLLBACK');throw error}finally{client.release()}
  }
  async get(id,token){if(!UUID.test(id)||!UUID.test(token))throw new OrderError('Acceso al pedido no válido.',404,'ORDER_NOT_FOUND');const {rows}=await this.pool.query('SELECT * FROM gm.orders WHERE id=$1',[id]);if(!rows.length||!timingSafeEqual(Buffer.from(rows[0].access_token_hash,'hex'),Buffer.from(hash(token),'hex')))throw new OrderError('Acceso al pedido no válido.',404,'ORDER_NOT_FOUND');return publicOrder(rows[0])}
+ async history(accountId,{page=1,limit=20}={}){
+ if(!UUID.test(accountId))throw new OrderError('Ingresá a tu cuenta.',401,'AUTH_REQUIRED');
+ if(!Number.isInteger(page)||page<1||page>100000||!Number.isInteger(limit)||limit<1||limit>50)throw new OrderError('Página inválida.',400,'INVALID_PAGE');
+ const {rows}=await this.pool.query(`SELECT * FROM gm.orders WHERE customer_account_id=$1 ORDER BY created_at DESC,id DESC LIMIT $2 OFFSET $3`,[accountId,limit+1,(page-1)*limit]);
+ return {data:rows.slice(0,limit).map(publicOrder),pagination:{page,limit,has_more:rows.length>limit}};
+ }
+ async getForAccount(id,accountId){
+ if(!UUID.test(id)||!UUID.test(accountId))throw new OrderError('Pedido no encontrado.',404,'ORDER_NOT_FOUND');
+ const {rows}=await this.pool.query('SELECT * FROM gm.orders WHERE id=$1 AND customer_account_id=$2',[id,accountId]);
+ if(!rows.length)throw new OrderError('Pedido no encontrado.',404,'ORDER_NOT_FOUND');
+ return publicOrder(rows[0]);
+ }
 }
-

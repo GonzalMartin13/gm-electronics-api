@@ -1,0 +1,700 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-10-05",
+  "by_code": {
+    "1007": {
+      "path": "images/web-1007-v1.jpg",
+      "source": "https://www.clickea.com.ar/cable-audio-35-mm-noga-x-3-mts-ac-78-3-508",
+      "model": "Cable Noga Ac-78 3 Metros Mini Plug 3,5Mm A Mini Plug 3,5Mm 3 Mt",
+      "color": null,
+      "illustrative": false
+    },
+    "1017": {
+      "path": "images/web-1060-v1.jpg",
+      "source": "https://parquelectro.com.ar/products/cable-de-red-noga-categoria-6-ethernet-patch-cord",
+      "model": "Cable De Red Noga Patch Cord Rj45 Cat 6 Largo 10 Mts",
+      "color": null,
+      "illustrative": true
+    },
+    "1030": {
+      "path": "images/web-1030-v1.jpg",
+      "source": "https://www.fravega.com/p/cable-miniplug-3-5-macho-miniplug-1-8-metros-audio-celular-pc-990229390/",
+      "model": "Cable Noga Ac-78 Mini Plug 3,5Mm A Mini Plug 3,5Mm 1,8 Mt",
+      "color": null,
+      "illustrative": false
+    },
+    "1059": {
+      "path": "images/web-1060-v1.jpg",
+      "source": "https://parquelectro.com.ar/products/cable-de-red-noga-categoria-6-ethernet-patch-cord",
+      "model": "Cable De Red Noga Patch Cord Rj45 Cat 6 Largo 15 Mts",
+      "color": null,
+      "illustrative": true
+    },
+    "1060": {
+      "path": "images/web-1060-v1.jpg",
+      "source": "https://parquelectro.com.ar/products/cable-de-red-noga-categoria-6-ethernet-patch-cord",
+      "model": "Cable De Red Noga Patch Cord Rj45 Cat 6 Largo 2 Mts",
+      "color": null,
+      "illustrative": true
+    },
+    "1078": {
+      "path": "images/web-1060-v1.jpg",
+      "source": "https://parquelectro.com.ar/products/cable-de-red-noga-categoria-6-ethernet-patch-cord",
+      "model": "Cable De Red Noga Patch Cord Rj45 Cat 6 Largo 5 Mts",
+      "color": null,
+      "illustrative": true
+    },
+    "1109": {
+      "path": "images/web-1109-v1.jpg",
+      "source": "https://www.dpsdigital.com.ar/electronica-audio-y-video_2/auriculares/auriculares-inalambricos-bluetooth-noga-twins-14-celetes-400096.html",
+      "model": "Auriculares Noga Ng-Btwins 14 True Wireless Hi- Res",
+      "color": "CELESTE",
+      "illustrative": false
+    },
+    "1241": {
+      "path": "images/web-1241-v1.jpg",
+      "source": "https://www.deviceparts.com/micro-to-lightning-aluminum-alloy-otg-adapter-silver.html",
+      "model": "ADAPTADOR MICRO USB A IPHONE ALTA CALIDAD ALUMINIO HI-SPEED",
+      "color": null,
+      "illustrative": true
+    },
+    "1443": {
+      "path": "images/web-1443-v1.jpg",
+      "source": "https://lhua-store.cl/products/soporte-base-tv-26-a-63-pulgadas-fijo-a-pared-hasta-50kg",
+      "model": "Soporte Tv Soptv-2663 Led Lcd Psp Pared - Fijo 26-63 Pulgadas",
+      "color": null,
+      "illustrative": true
+    },
+    "1466": {
+      "path": "images/web-1466-v1.jpg",
+      "source": "https://www.tiendatec.es/informatica/almacenamiento/tarjetas-de-memoria/micro-sd/2190-kingston-canvas-select-plus-microsdxc-256gb-c10-u3-v30-a1-100mb-s-740617298710.html",
+      "model": "Memoria Kingston Micro Sd 256 Gb Canvas Selec Plus 100 Mb/S",
+      "color": null,
+      "illustrative": false
+    },
+    "1552": {
+      "path": "images/web-1552-v1.webp",
+      "source": "https://www.mercadolibre.com.ar/cable-extensor-alargue-usb-20-noga-prolongador-3mts-mh-color-negro/p/MLA23554435",
+      "model": "CABLE NOGA USB A / A EXTENSION USB LARGO USB 2,0 1,2 M",
+      "color": null,
+      "illustrative": true
+    },
+    "1570": {
+      "path": "images/web-1570-v1.webp",
+      "source": "https://electrobya.mitiendanube.com/productos/soporte-celular-ajustable-para-ventilacion-auto-noga-hold10/",
+      "model": "Soporte Noga Ng-Hold 10 Para Celulares Rejilla Ventilacion",
+      "color": null,
+      "illustrative": false
+    },
+    "1734": {
+      "path": "images/web-1734-v1.webp",
+      "source": "https://todopila.com.ar/producto/FA1734",
+      "model": "CARGADOR MOTOROLA 50 MC-506 TIPO C + USB 50W TURBO CHARGER TECNOLOGIA GANFAST",
+      "color": null,
+      "illustrative": false
+    },
+    "1751": {
+      "path": "images/web-1751-v1.webp",
+      "source": "https://goldery.ar/productos/auricular-joya-gy-e01-z9ei7/",
+      "model": "Auriculares Goldery Diamonds Gy-E01 Piedras Orejeros",
+      "color": "NEGRO",
+      "illustrative": false
+    },
+    "1754": {
+      "path": "images/web-1754-v1.webp",
+      "source": "https://goldery.ar/productos/auricular-joya-gy-e03-eshqp/",
+      "model": "Auriculares Goldery Diamonds Gy-E03 Piedras Orejeros",
+      "color": "NEGRO",
+      "illustrative": false
+    },
+    "1809": {
+      "path": "images/web-1809-v1.webp",
+      "source": "https://noganet.ar/productos/ngl-400bt-parlante-portable-inalambrico-bt-karaoke-con-led/",
+      "model": "Parlante Portable Noga Ngl-400Bt 6,5\" Karaoke Bt Led Light Recargable",
+      "color": null,
+      "illustrative": false
+    },
+    "1812": {
+      "path": "images/web-1812-v1.webp",
+      "source": "https://e-damianakis.gr/kalodio-ichoy-3-5mm-jack-male-male-1-8m-500200140-oem",
+      "model": "CABLE MINI PLUG @ MINI PLUG 3,5 MM 1,8 M P/ AUDIO PC / NOTEBOOK  / ESTEREOS . GRUESO",
+      "color": null,
+      "illustrative": true
+    },
+    "1946": {
+      "path": "images/web-1946-v1.webp",
+      "source": "https://noganet.ar/productos/hdmi-5m-m-1-4-cable-hdmi-1-4-de-5-metros/",
+      "model": "Cable Hdmi Noga 1,4V 15 Metros 2K Y 4 K Ultra Hd Calidad Grueso Doble Filtro",
+      "color": null,
+      "illustrative": false
+    },
+    "2069": {
+      "path": "images/web-2069-v1.png",
+      "source": "https://www.jssoluciones.com.ar/productos/auricular-inalambrico-noganet-ng-btwins-2/",
+      "model": "Auriculares Noga Ng-Btwins 2 True Wireless Hi- Res",
+      "color": "BLANCO",
+      "illustrative": false
+    },
+    "2083": {
+      "path": "images/web-2083-v1.png",
+      "source": "https://batteryeliminatorstore.com/products/aa-to-c-adapter",
+      "model": "Adaptador Kosmo Para Pila Aa A C Mediana Universal Recargables / Alcalinas",
+      "color": null,
+      "illustrative": true
+    },
+    "2119": {
+      "path": "images/web-2119-v1.jpg",
+      "source": "https://insumaxinformatica.com.ar/488572-conectividad-noga-alargue-extension-usb-3-metros-2-0",
+      "model": "CABLE NOGA USB A / A EXTENSION USB LARGO USB 2,0 3 M",
+      "color": null,
+      "illustrative": false
+    },
+    "2135": {
+      "path": "images/web-2135-v1.webp",
+      "source": "https://noganet.ar/productos/nkb-78011-teclado-usb/",
+      "model": "Teclado Noga Nkb-78011 Usb 104 Teclas",
+      "color": null,
+      "illustrative": false
+    },
+    "2172": {
+      "path": "images/web-0429-v1.webp",
+      "source": "https://virtualhouse.com.ar/productos/cable-de-red-noga-patch-cord-cat5-rj45/",
+      "model": "Cablede Red Noga Patch Cord Rj45 Cat5 Largo 10 Mts",
+      "color": null,
+      "illustrative": true
+    },
+    "2281": {
+      "path": "images/web-2281-v1.jpg",
+      "source": "https://www.sodimac.cl/sodimac-cl/articulo/110644661/Adaptador-lightning-a-Jack-3.5-Compatible-con-iphone/110644662",
+      "model": "CABLE ADAPTADOR (MACHO) TO JACK 3,5MM (HEMBRA) -  PRESENTADO EN CAJA",
+      "color": null,
+      "illustrative": true
+    },
+    "2363": {
+      "path": "images/web-2363-v1.jpg",
+      "source": "https://www.falconcomputers.co.uk/newlink/vga-to-hdmi-converter-with-audio-jack.html",
+      "model": "ADAPTADOR CONVERSOR ( VGA-HDTV ) VGA + AUDIO @ HDMI  PC / NOTEBOOK / PROYECTORES",
+      "color": null,
+      "illustrative": true
+    },
+    "2366": {
+      "path": "images/web-2366-v1.jpg",
+      "source": "https://www.mytrendyphone.ie/shop/hdmi-vga-adapter-3-5mm-aux-cable-303879p.html",
+      "model": "ADAPTADOR CONVERSOR (HDTV-VGA) HDMI A VGA CON AUDIO  PC / NOTEBOOK / PROYECTORES",
+      "color": null,
+      "illustrative": true
+    },
+    "2996": {
+      "path": "images/web-2996-v1.jpg",
+      "source": "https://www.altavistasa.com.ar/memorias-flash/6480-micro-sd-hc-3200-gb-hiksemi-neo-sin-adaptador-cla.html",
+      "model": "MEMORIA HIKSEMI MICRO SD 32 GB NEO CLASE 10 V10 UHS-I 92MB/S",
+      "color": null,
+      "illustrative": false
+    },
+    "3009": {
+      "path": "images/web-3009-v1.jpg",
+      "source": "https://www.websupplies.gr/true-wireless-earbuds-qcy-t1c-black",
+      "model": "Auriculares Qcy T1C Bluetooth 4 Hs / 16 Hs",
+      "color": "NEGRO",
+      "illustrative": false
+    },
+    "3018": {
+      "path": "images/web-3018-v1.png",
+      "source": "https://www.cnaimport.com/web/productos/338",
+      "model": "Auriculares Qcy T1C Bluetooth 4 Hs / 16 Hs",
+      "color": "BLANCO",
+      "illustrative": false
+    },
+    "3023": {
+      "path": "images/web-3023-v1.webp",
+      "source": "https://noganet.ar/productos/nh-l1-luz-de-emergencia-30-leds-rbd4x/",
+      "model": "Luces De Emergencia Noga Nh-L1 30 Leds Portatil Moderna Recargable 300L 6500K",
+      "color": null,
+      "illustrative": false
+    },
+    "3024": {
+      "path": "images/web-3024-v1.webp",
+      "source": "https://noganet.ar/productos/nh-l2-luz-de-emergencia-60-leds-q36qf/",
+      "model": "Luces De Emergencia Noga Nh-L2 60 Leds Portatil Moderna Recargable 300L 6500K",
+      "color": null,
+      "illustrative": false
+    },
+    "3090": {
+      "path": "images/web-3090-v1.png",
+      "source": "https://pglelectronica.com.ar/tienda/cargador-motorola-68-mc-686n-tipo-c-68w-sa18d60310-original/",
+      "model": "Cargador Motorola 68 Mc-686N Tipo C 68W + Cable 6,5A Turbo Charger En Caja",
+      "color": null,
+      "illustrative": false
+    },
+    "3109": {
+      "path": "images/web-3109-v1.webp",
+      "source": "https://noganet.ar/productos/nkb-q20-combo-dual-inalambrico-2-4g-bt/",
+      "model": "Kit Teclado Y Mouse Noga Nkb-Q20Az Dual Bluetooth + Nano 2,4G C/Bateria",
+      "color": "AZUL",
+      "illustrative": false
+    },
+    "3118": {
+      "path": "images/web-3118-v1.webp",
+      "source": "https://noganet.ar/productos/nkb-q50-teclado-multimedia-rgb-leds-vintage/",
+      "model": "Teclado Noga Nkb-Q50 Rgb Multimedia Con Cable Diseño Vintage Soft Touch 98 Tecla",
+      "color": null,
+      "illustrative": true
+    },
+    "3151": {
+      "path": "images/web-1060-v1.jpg",
+      "source": "https://parquelectro.com.ar/products/cable-de-red-noga-categoria-6-ethernet-patch-cord",
+      "model": "Cable De Red Noga Patch Cord Rj45 Cat 6 Largo 3 Mts",
+      "color": null,
+      "illustrative": true
+    },
+    "3510": {
+      "path": "images/web-3510-v1.jpg",
+      "source": "https://www.beleoelectro.com.ar/Productos/Ver/202",
+      "model": "Radio Daihatsu D-Rk7 Am/Fm Analogica Con Antena",
+      "color": "NEGRO",
+      "illustrative": false
+    },
+    "4512": {
+      "path": "images/web-4512-v1.jpg",
+      "source": "https://soul.com.ar/detalle/teclado-plegable-touchpad-kbt04/993",
+      "model": "Teclado Con Touchpad 2 En 1 Soul Kbt-04 Plegable Recargale Androi Ios Win",
+      "color": "NEGRO",
+      "illustrative": false
+    },
+    "4516": {
+      "path": "images/web-4516-v1.jpg",
+      "source": "https://soul.com.ar/detalle/combo-teclado-%26-mouse-inalambrico-ocw150/803",
+      "model": "KIT SOUL OCW150 OFFICE TECLADO Y MOUSE 1200 DPI WiN 7 / 8 / 10 / 10 MAC OS / ANDROID",
+      "color": null,
+      "illustrative": false
+    },
+    "4522": {
+      "path": "images/web-4522-v1.jpg",
+      "source": "https://soul.com.ar/detalle/estacion-de-carga-8-en-1/999",
+      "model": "ESTACION DE CARGA 8 EN 1 SOUL CVJ-8EN1NE 5 TYPE C + 3 QC USB PD65W / QC22,5W GaN",
+      "color": null,
+      "illustrative": false
+    },
+    "5011": {
+      "path": "images/web-5011-v1.webp",
+      "source": "https://www.floridadigital.com.ar/productos/auriculares-bluetooth-vincha-aris-noga-ng-a910bt-1eb3q/",
+      "model": "AURICULARES NOGA NG-A910BT ARIS BLUETOOTH 6,0 CON MIC 15 HS  DUAL + 3,5MM",
+      "color": "NEGRO",
+      "illustrative": false
+    },
+    "5012": {
+      "path": "images/web-5012-v1.webp",
+      "source": "https://www.floridadigital.com.ar/productos/auriculares-bluetooth-vincha-aris-noga-ng-a910bt-1eb3q/",
+      "model": "AURICULARES NOGA NG-A910BT ARIS BLUETOOTH 6,0 CON MIC 15 HS  DUAL + 3,5MM",
+      "color": "GRIS",
+      "illustrative": false
+    },
+    "5013": {
+      "path": "images/web-5013-v1.webp",
+      "source": "https://www.floridadigital.com.ar/productos/auriculares-bluetooth-vincha-aris-noga-ng-a910bt-1eb3q/",
+      "model": "AURICULARES NOGA NG-A910BT ARIS BLUETOOTH 6,0 CON MIC 15 HS  DUAL + 3,5MM",
+      "color": "AZUL",
+      "illustrative": false
+    },
+    "5014": {
+      "path": "images/web-5014-v1.webp",
+      "source": "https://www.floridadigital.com.ar/productos/auriculares-bluetooth-vincha-aris-noga-ng-a910bt-1eb3q/",
+      "model": "AURICULARES NOGA NG-A910BT ARIS BLUETOOTH 6,0 CON MIC 15 HS  DUAL + 3,5MM",
+      "color": "ROSADO",
+      "illustrative": false
+    },
+    "0546": {
+      "path": "images/web-0546-v1.webp",
+      "source": "https://noganet.ar/productos/ngt-lt52-soporte-para-pantalla-lcd/",
+      "model": "Soporte Noga Ngt-Lt52 Tv Led 26 A 65 ° Fijo Hasta 30 Kg",
+      "color": null,
+      "illustrative": false
+    },
+    "0625": {
+      "path": "images/web-0625-v1.webp",
+      "source": "https://noganet.ar/productos/ng-uw06-adaptador-nano-wireless-150-mbps/",
+      "model": "Placa De Red Noga Ng-Uw06 Usb 2,4Ghz Wirelees 150 Mbps",
+      "color": null,
+      "illustrative": false
+    },
+    "0545": {
+      "path": "images/web-0545-v1.webp",
+      "source": "https://noganet.ar/productos/ngt-lt20-soporte-para-pantalla-lcd/",
+      "model": "Soporte Noga Ngt-Lt20 Tv Led 14 A 42° Fijo Hasta 25 Kg",
+      "color": null,
+      "illustrative": false
+    },
+    "0653": {
+      "path": "images/web-0653-v1.webp",
+      "source": "https://noganet.ar/productos/ganon-teclado-mecanico-gamer-retroiluminado/",
+      "model": "Teclado Noga Ganon 60% Mecánico Gamer Retroiluminado Rgb Hue Chromatic Led",
+      "color": null,
+      "illustrative": false
+    },
+    "0701": {
+      "path": "images/web-0701-v1.webp",
+      "source": "https://noganet.ar/productos/ng-611u-mouse-optico-usb/",
+      "model": "Mouse Noga Ng-611U Usb Optico Contorno Iluminacion Led Gamer",
+      "color": "NEGRO",
+      "illustrative": false
+    },
+    "0429": {
+      "path": "images/web-0429-v1.webp",
+      "source": "https://virtualhouse.com.ar/productos/cable-de-red-noga-patch-cord-cat5-rj45/",
+      "model": "Cablede Red Noga Patch Cord Rj45 Cat5 Largo 1 Mts",
+      "color": null,
+      "illustrative": true
+    },
+    "0424": {
+      "path": "images/web-0429-v1.webp",
+      "source": "https://virtualhouse.com.ar/productos/cable-de-red-noga-patch-cord-cat5-rj45/",
+      "model": "Cablede Red Noga Patch Cord Rj45 Cat5 Largo 2 Mts",
+      "color": null,
+      "illustrative": true
+    },
+    "0543": {
+      "path": "images/web-0429-v1.webp",
+      "source": "https://virtualhouse.com.ar/productos/cable-de-red-noga-patch-cord-cat5-rj45/",
+      "model": "Cablede Red Noga Patch Cord Rj45 Cat5 Largo 3 Mts",
+      "color": null,
+      "illustrative": true
+    },
+    "0265": {
+      "path": "images/web-0429-v1.webp",
+      "source": "https://virtualhouse.com.ar/productos/cable-de-red-noga-patch-cord-cat5-rj45/",
+      "model": "Cablede Red Noga Patch Cord Rj45 Cat5 Largo 5 Mts",
+      "color": null,
+      "illustrative": true
+    },
+    "0937": {
+      "path": "images/web-0937-v1.jpg",
+      "source": "https://puntova.com.ar/producto/fuente-multivoltaje-universal-noga-105/",
+      "model": "Fuente Noga Ng-105 Regulable 500 Mah Universal",
+      "color": null,
+      "illustrative": false
+    },
+    "0052": {
+      "path": "images/web-0052-v1.webp",
+      "source": "https://kosmo.com.ar/tech/cables/micro-usb/",
+      "model": "CABLE KOSMO MICRO USB a USB 1 METRO PARA CARGA Y TRANSFERENCIA DE DATOS",
+      "color": null,
+      "illustrative": false
+    },
+    "0698": {
+      "path": "images/web-0698-v1.webp",
+      "source": "https://www.djcell.com.ar/productos/combo-teclado-mouse-inalambrico-kolke-kek-195/",
+      "model": "KIT KOLKE KEK-195 TECLADO MULTMEDIA Y MOUSE INALAMBRICO 2,4 Ghz ESPAÑOL",
+      "color": null,
+      "illustrative": false
+    },
+    "0478": {
+      "path": "images/web-0478-v1.jpg",
+      "source": "https://dpsdigital.com.ar/computacion_2/perifericos/teclado-con-cable-pc-usb-noga-nkb-410-notebook-multimedia-235189.html",
+      "model": "Teclado Noga Nkb-410 Usb Multimedia",
+      "color": null,
+      "illustrative": false
+    },
+    "0454": {
+      "path": "images/web-0454-v1.jpg",
+      "source": "https://alltek.ar/59399-sonido-noganet-auricular-bt-noga-ng-bt400-in-ear-ma-libres",
+      "model": "Auriculares Noga Ng-Bt400 Bluetooth Sport Fit Remoto",
+      "color": "NEGRO",
+      "illustrative": false
+    },
+    "0103": {
+      "path": "images/web-0103-v1.jpg",
+      "source": "https://dpsdigital.com.ar/electronica-audio-y-video_2/cables/cable-interlock-tipo-8-alimentacion-220v-15mts-para-tv-radios-consolas-226938.html",
+      "model": "CABLE INTERLOCK 8 COMUN 1,5 M INDUSTRIA ARGENTINA. 2 X 0,50 MM",
+      "color": null,
+      "illustrative": true
+    },
+    "0749": {
+      "path": "images/web-0749-v1.jpg",
+      "source": "https://dpsdigital.com.ar/electronica-audio-y-video_2/cables/cable-interlock-trebol-para-fuente-notebook-pc-cargador-226940.html",
+      "model": "CABLE INTERLOCK NOTEBOOK TREBOL LARGO 1,5 M INDUSTRIA ARGENTINA  3 X 0,75",
+      "color": null,
+      "illustrative": true
+    },
+    "0085": {
+      "path": "images/web-0085-v1.jpg",
+      "source": "https://www.diamondcomputacion.com.ar/fuente-noga-atx-550-p4-550w-24-pines/p",
+      "model": "Fuente Pc Noga Atx-550 W P4 Homologada",
+      "color": null,
+      "illustrative": false
+    },
+    "0544": {
+      "path": "images/web-0544-v1.jpg",
+      "source": "https://www.fravega.com/p/cable-hdmi-20-metros-1080p-noga-pc-tv-monitor-20m-v1-4-990165886/",
+      "model": "Cable Hdmi Noga 1,4V 20 Metros 2K Y 4 K Ultra Hd Calidad Grueso Doble Filtro",
+      "color": null,
+      "illustrative": false
+    }
+  },
+  "assets": {
+    "images/web-2135-v1.webp": {
+      "sha256": "c0dc936f0241e0dcaf663880e0417a9f9fd6af520c960dc12c7c2e983306aba6",
+      "bytes": 43286,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/001/593/734/products/nkb-78011-angulo1-fac4a83a415191587d16558357026982-1024-1024.webp"
+    },
+    "images/web-3024-v1.webp": {
+      "sha256": "81b7cac1edc8736e137c2e87a7f6aaccb4d50f547fc3b38406ee49cb2804f3be",
+      "bytes": 29886,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/001/593/734/products/nh-l2-angulo-a8328688d91ca7d6d317829170835787-1024-1024.webp"
+    },
+    "images/web-3023-v1.webp": {
+      "sha256": "6b937f4b3904d568f89f71115f8364bb97c1a35fa9492d192d160d8942d3cf3e",
+      "bytes": 39790,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/001/593/734/products/nh-l1-angulo-b0c815f1169dfd609f17829166404357-1024-1024.webp"
+    },
+    "images/web-1809-v1.webp": {
+      "sha256": "b60716f7de0f1236cfa5233ee46fe98c2aa8289dc0b986caf5cdcc868c9bf75b",
+      "bytes": 138190,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/001/593/734/products/ngl-400bt-frente1-90255f30ad5deea3b216491839678309-1024-1024.webp"
+    },
+    "images/web-0546-v1.webp": {
+      "sha256": "7ccfb6a3f247124716eed8c10ea51ab422df91a09bf5d244592502d848289975",
+      "bytes": 30738,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/001/593/734/products/ngt-lt52-493ce08ad68cde734717381813935035-1024-1024.webp"
+    },
+    "images/web-0625-v1.webp": {
+      "sha256": "c2ecadc11431e3df1d9647efa8f2f9450382a6f83e65a59ef111d0299d701cdd",
+      "bytes": 32112,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/001/593/734/products/ng-uw06-angulo-fd71187debbf44874417297914057107-1024-1024.webp"
+    },
+    "images/web-0545-v1.webp": {
+      "sha256": "ffef051240e9ce5ecdb3b181f48196478000e4e569566959cbe593db24da7612",
+      "bytes": 36866,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/001/593/734/products/ngt-lt20-7d38169c36730a0e3017381806264149-1024-1024.webp"
+    },
+    "images/web-0653-v1.webp": {
+      "sha256": "8f9cf2d14bffd37ca24290415f10225ddaa7fca9fd520dae83561a839795445b",
+      "bytes": 74494,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/001/593/734/products/ganon-angulo1-022637b9bbbe3473ec16159320864533-1024-1024.webp"
+    },
+    "images/web-0701-v1.webp": {
+      "sha256": "1883e9f10f953baf64051cacb8128aa35bd55f6f2525b63db040c07a9e24e3e9",
+      "bytes": 46308,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/001/593/734/products/ng-611u-ng-full1-caa428fd13420037e416315535088578-1024-1024.webp"
+    },
+    "images/web-3109-v1.webp": {
+      "sha256": "296be65b718b994977e10dd9656e7219bd3769db32fa56c59b9851917e0c29ae",
+      "bytes": 52954,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/001/593/734/products/nkb-q20-01-5267c0eb34a618fd3917604627794319-1024-1024.webp"
+    },
+    "images/web-3118-v1.webp": {
+      "sha256": "1e4aa9f593870e385f6590e170629140f61df7827712abaf901e720e66448694",
+      "bytes": 14724,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/001/593/734/products/nkb-q50-frente-655202a35fb5636c9b17404281606677-640-0-e29071d435e1414a4317433476700791-1024-1024.webp"
+    },
+    "images/web-1946-v1.webp": {
+      "sha256": "9307289ebfd324fd970d88f9be26779c81bf43d99c2a56db79848a0ad2a2578d",
+      "bytes": 105246,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/001/593/734/products/hdmi-15m-14-cable-287e34080b7d5fdc9f17332367771851-1024-1024.webp"
+    },
+    "images/web-4522-v1.jpg": {
+      "sha256": "482a79cbc9dd6b30c21d2f0036ff12d9da5a2dedcba31c4d1a92b0e4b8d31854",
+      "bytes": 287120,
+      "image_source": "https://www.megga.com.ar/img_fotos_productos/07281815_01.jpg"
+    },
+    "images/web-4516-v1.jpg": {
+      "sha256": "dd06a23846ab24e0b5a31fab92a7b3cf41e5da51a87bd1182c85d1545ab826f5",
+      "bytes": 316615,
+      "image_source": "https://www.megga.com.ar/img_fotos_productos/05131153_FotoWebOC150.jpg"
+    },
+    "images/web-4512-v1.jpg": {
+      "sha256": "7c7c7d30c476ce8f8afb8f25c38751d7d4c1b8563e014a2401332c450398a955",
+      "bytes": 430769,
+      "image_source": "https://www.megga.com.ar/img_fotos_productos/06291508_Web00013.jpg"
+    },
+    "images/web-1751-v1.webp": {
+      "sha256": "45516968926d02447fced63f35a9150ebe7938eb5b9e2a6111c5b01231dd7d01",
+      "bytes": 28664,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/002/339/610/products/gy-e01-ng-4-555f0c95b8f48497af17746322373761-1024-1024-6026df313d09f76ae217749779195676-1024-1024.webp"
+    },
+    "images/web-1754-v1.webp": {
+      "sha256": "3f86bee7829ba6099a1f88955b43151225f8684c5e859b545a8b977a55a06108",
+      "bytes": 55376,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/002/339/610/products/gy-e03-ng-1-32072e59c1123d7d9017746371652468-1024-1024-901b6004c46745489517749657273593-1024-1024.webp"
+    },
+    "images/web-5011-v1.webp": {
+      "sha256": "6412db40c193444b7c0d906d58ef0eb1f836433c598b3a231269add760af9943",
+      "bytes": 122826,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/236/748/products/image-5-114681762aa023c3f517740250663260-1024-1024.webp"
+    },
+    "images/web-5012-v1.webp": {
+      "sha256": "a0d2c49070de0650142e0ca88b5d9b7ec558b56cc0ce6b8e4a922a9e9d91d447",
+      "bytes": 119086,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/236/748/products/image-7-a173f8b00caeea907717740250662102-1024-1024.webp"
+    },
+    "images/web-0429-v1.webp": {
+      "sha256": "04f1d0cf5146564f6a8328efa754947c0b6c749cc42ce485f54ea2f5df1be3a8",
+      "bytes": 6436,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/001/864/316/products/d_929852-mla69454355114_052023-o-240939142a6e78f87c16843571715287-480-0.webp"
+    },
+    "images/web-5014-v1.webp": {
+      "sha256": "7ec9ef62543193af6523e041d4ec1838cdee24d8bb24262f53669e0a75e7c8b8",
+      "bytes": 129512,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/236/748/products/image-9-32873a3f1101dee0bb17740250660181-1024-1024.webp"
+    },
+    "images/web-5013-v1.webp": {
+      "sha256": "edd72713536cc5e48647268c38d73905ac7b48961e278b01286d0d9fd42cdebe",
+      "bytes": 108312,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/236/748/products/image-8-52c4cfee68204864e817740250659206-1024-1024.webp"
+    },
+    "images/web-1060-v1.jpg": {
+      "sha256": "3c17dc037b3409bb5aa9ed91cac38a16a44266a101b3dd4d8cbcf20f7aad612c",
+      "bytes": 27915,
+      "image_source": "https://parquelectro.com.ar/cdn/shop/files/34743-producto-1.jpg?v=1772630563&width=1920"
+    },
+    "images/web-0937-v1.jpg": {
+      "sha256": "d70ca67fede6598fecd5a0618e6fdd2a7a97186e92c3fe8230044a8e5e445875",
+      "bytes": 35961,
+      "image_source": "https://puntova.com.ar/wp-content/uploads/2022/09/mts5604.jpg"
+    },
+    "images/web-1466-v1.jpg": {
+      "sha256": "c88f90f021d8dba521155e09be01bee5695f2132ef39ca2006c88d194ddcf35b",
+      "bytes": 36053,
+      "image_source": "https://www.tiendatec.es/9759-large_default/kingston-canvas-select-plus-microsdxc-256gb-c10-u3-v30-a1-100mb-s.jpg"
+    },
+    "images/web-0052-v1.webp": {
+      "sha256": "090553e8fe4edaba0dab40b4a05e8b3b79f7e408120b6aa16725a91099449025",
+      "bytes": 56938,
+      "image_source": "https://dcdn-us.mitiendanube.com/stores/006/918/589/products/dsc08915-e656d9e2ed7e29471317635783761148-1024-1024.webp"
+    },
+    "images/web-0698-v1.webp": {
+      "sha256": "8476fa6a5b16c92593f2ccb70b73200a0821236b5e8248d3c158806c66beca44",
+      "bytes": 62594,
+      "image_source": "https://dcdn-us.mitiendanube.com/stores/703/273/products/78481152_1297081453811564_3096342833943019520_n-5e37ee8678b02dae9e17426173478191-1024-1024.webp"
+    },
+    "images/web-3510-v1.jpg": {
+      "sha256": "6958df3121328d374b5f00c1c44e11158a3c301854bb4bff3ec7f39eb55534fc",
+      "bytes": 62489,
+      "image_source": "https://www.beleoelectro.com.ar/Imagenes/Productos/191/gmain.jpg"
+    },
+    "images/web-1570-v1.webp": {
+      "sha256": "a3b18eef9bd06bd29df5c79a990ffe01501af9e24549b26b0db019c010533007",
+      "bytes": 20178,
+      "image_source": "https://acdn-us.mitiendanube.com/stores/001/081/197/products/d_959267-mla99902370797_112025-b-3f45f264b2b568fd0317673821224646-1024-1024.webp"
+    },
+    "images/web-3090-v1.png": {
+      "sha256": "88260dbc4d38252a38463989777f46d18fc96053d6c4290287b7cae7cf11a37f",
+      "bytes": 186284,
+      "image_source": "https://pglelectronica.com.ar/wp-content/uploads/2025/01/Cargador-Motorola-68-MC-686N-Tipo-C-68W-SA18D60310-1024x1024.png"
+    },
+    "images/web-1734-v1.webp": {
+      "sha256": "9d6b6b035ac66895d6cdcc6d25898ba1ad994d353bab0db160de307c260beb6b",
+      "bytes": 37396,
+      "image_source": "https://todopila.com.ar/img/articulos/FA1734.webp"
+    },
+    "images/web-0478-v1.jpg": {
+      "sha256": "33ab3273bdedb607ec415e6db652e76902c755d3a9a6d14e3bdb79a4dabbc246",
+      "bytes": 50942,
+      "image_source": "https://statics.qloud.ar/dps-digital-08-2021/230_13-01-2023-02-01-44-teclado-nkb410-2.jpg"
+    },
+    "images/web-1007-v1.jpg": {
+      "sha256": "62cdb0fce347ba5d8947506ec43a689432a20790cdd991081627c5a7786ece2b",
+      "bytes": 58846,
+      "image_source": "https://www.clickea.com.ar/admin/productos/2399428d9bab582e73703c0a67f92408.jpg"
+    },
+    "images/web-0454-v1.jpg": {
+      "sha256": "1078b1ed19b828f3dabe6271ea99bc57c0b7f9cd3e83221ef67ee4deeac0d6d6",
+      "bytes": 41293,
+      "image_source": "https://alltek.ar/img/Public/1065-producto-d-nq-np-871433-mla45507529151-042021-o-4797.jpeg"
+    },
+    "images/web-1109-v1.jpg": {
+      "sha256": "cde0a34523b4a068ee19235e26be95be616797c427d0e003f2dc77b01e6618b0",
+      "bytes": 51376,
+      "image_source": "https://statics.qloud.ar/230/16-01-2025-10-01-32_AURICULAR-BTWINS14CL1.jpg"
+    },
+    "images/web-2119-v1.jpg": {
+      "sha256": "02a3dec2cef4fe880db7eb3d7912661bcf06c3cbef66943af95fdec9055419f4",
+      "bytes": 27862,
+      "image_source": "https://insumaxinformatica.com.ar/img/Public/1073/53668-producto-1080-x-1080-85.jpg"
+    },
+    "images/web-0103-v1.jpg": {
+      "sha256": "d4da6f182d8faa473f55870e148ad47b7fb99aae9913ef1c4b187d9dca79c6df",
+      "bytes": 22038,
+      "image_source": "https://statics.qloud.ar/dps-digital-08-2021/230_29-12-2022-05-12-23-cable-int8ch-2.jpg"
+    },
+    "images/web-0749-v1.jpg": {
+      "sha256": "6d836312f5bb4d9665ed1d8f3328d92eada3835155acf81925875a497e86e107",
+      "bytes": 83803,
+      "image_source": "https://statics.qloud.ar/dps-digital-08-2021/230_29-12-2022-05-12-38-cable-inttrebol-1.jpg"
+    },
+    "images/web-3009-v1.jpg": {
+      "sha256": "3af8f66d446d4382a2cb9c958cbb088e3985960254c421362e6ab3d25c73453b",
+      "bytes": 170268,
+      "image_source": "https://www.websupplies.gr/images/thumbs/0202661.jpeg"
+    },
+    "images/web-0085-v1.jpg": {
+      "sha256": "0bdd385685c03b28353af33a524826ce6aeda897af3f517d6e46d2d8c340b090",
+      "bytes": 109995,
+      "image_source": "https://diamondsystemar.vtexassets.com/arquivos/ids/157008/550245502990_2.jpg?v=638069062078900000"
+    },
+    "images/web-1552-v1.webp": {
+      "sha256": "a8c4e1729475cba197ed29cdea19d94c367bc1c8bf8ecdcce7e41961d92de580",
+      "bytes": 11288,
+      "image_source": "https://http2.mlstatic.com/D_NQ_NP_936606-MLA93082890194_092025-O.webp"
+    },
+    "images/web-2996-v1.jpg": {
+      "sha256": "4af6e77f078acc98e9d63e0e234bd74bb27a4ebb10e87b229f800c11aa662a9f",
+      "bytes": 154194,
+      "image_source": "https://www.altavistasa.com.ar/15643-large_default/micro-sd-hc-3200-gb-hiksemi-neo-sin-adaptador-cla.jpg"
+    },
+    "images/web-0544-v1.jpg": {
+      "sha256": "91aec902fa4a849f4db833c890bac1efdb44d9fc8e3333b85d42276cc0a633b7",
+      "bytes": 109298,
+      "image_source": "https://images.fravega.com/f1000/496422a94eeb0a8e25a89176f525fb3f.jpg"
+    },
+    "images/web-1030-v1.jpg": {
+      "sha256": "66163c522020e86715e9de38dadc6494109e4632e6be15b6057c6835d61c132f",
+      "bytes": 90857,
+      "image_source": "https://images.fravega.com/f1000/a829df07a8ef0509ec1b74b0c3653344.jpg"
+    },
+    "images/web-1812-v1.webp": {
+      "sha256": "a84a509731ed56b86a5376b130bf493e210655a8c24d97cdeb168e1f8680ce02",
+      "bytes": 42752,
+      "image_source": "https://e-damianakis.gr/image/cache/wp/gj/product/500200140-800x800.webp"
+    },
+    "images/web-2366-v1.jpg": {
+      "sha256": "05a1fd0279bc6e0dd06b0aef7c919f8cd74945fb54abd401eb0b343e1082f467",
+      "bytes": 134132,
+      "image_source": "https://www.mytrendyphone.ie/images/HDMI-VGA-Adapter-with-3-5mm-AUX-Cable-23122022-01-p.webp"
+    },
+    "images/web-2363-v1.jpg": {
+      "sha256": "d9638e62e42912205a97784c3e74f45a6925ab9be720ed4d78777532d39afc78",
+      "bytes": 360615,
+      "image_source": "https://falconcomputers.co.uk/media/products/85397/0/0/newlink-vga-to-hdmi-converter-with-audio-jack.jpg.jpg"
+    },
+    "images/web-1241-v1.jpg": {
+      "sha256": "626b43495e45b6e514bf86aae6e561ee32559f9a5e69746de71bd047cbb64b20",
+      "bytes": 112069,
+      "image_source": "https://www.deviceparts.com/images/detailed/296/21320220407133656.jpg"
+    },
+    "images/web-1443-v1.jpg": {
+      "sha256": "e1a649538a2278ec6460cf48b90d449d588922c05fedad709edc06257877f1f1",
+      "bytes": 50932,
+      "image_source": "https://lhua-store.cl/cdn/shop/products/soporte-base-tv-26-a-63-pulgadas-fijo-a-pared-hasta-50kg-872798.jpg?v=1681336780"
+    },
+    "images/web-2083-v1.png": {
+      "sha256": "ecbd878358a82cbd2b11cd656922628ebf154dce7288c06a6df6bcb81c2b4d28",
+      "bytes": 52846,
+      "image_source": "https://batteryeliminatorstore.com/cdn/shop/products/AA-C_Adapter_2.png?v=1716272801&width=1445"
+    },
+    "images/web-2281-v1.jpg": {
+      "bytes": 10715,
+      "sha256": "87d19ea9926b628fef009b5bde14f689c9293d7d40c8cc375429c9eec82f48b5",
+      "image_source": "https://media.falabella.com/falabellaCL/110644662_01/w%3D800%2Ch%3D800%2Cfit%3Dpad"
+    },
+    "images/web-2069-v1.png": {
+      "bytes": 285144,
+      "sha256": "90fd0295b0ae8b67a5a80dcee80bb5e7b73754bd42540bdb4b9b4542b0eb2207",
+      "image_source": "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/971/581/products/twein1-498bea951cff23c12a16650661128550-1024-1024.png"
+    },
+    "images/web-3018-v1.png": {
+      "bytes": 175049,
+      "sha256": "54c9aa34551a0081c11e716f276f2a32ab3a840fa2227d1acd06fca612d3b034",
+      "image_source": "https://res.cloudinary.com/dvijjtwty/image/upload/f_auto,q_auto,w_900/v1768935720/cna/auriculares/qcy_blanco.png"
+    }
+  }
+}

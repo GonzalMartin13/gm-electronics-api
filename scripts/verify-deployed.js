@@ -1,4 +1,5 @@
 import {excludedImagePaths,isExcludedImage} from '../src/photo-review.js';
+import {replacementAssets} from '../src/photo-replacements.js';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
@@ -34,7 +35,7 @@ async function verify() {
   assert.equal((await get('/api/v1/variants/765')).data.precio_pesos,'3661.00');assert.equal((await get('/api/v1/variants/2362')).data.stock_disponible,null);report.checks.push('updated_price_and_conflict');
   const manifest=JSON.parse(await readFile(new URL('../data/image-manifest.json',import.meta.url),'utf8'));
   const imageUrls=[products.find(p=>p.imagen).imagen,products.flatMap(p=>p.variantes).find(v=>v.imagenes.length).imagenes[0]];
-  for(const imageUrl of imageUrls){const response=await fetch(imageUrl,{signal:AbortSignal.timeout(15000)});assert.equal(response.status,200);const bytes=Buffer.from(await response.arrayBuffer());const path=decodeURIComponent(new URL(imageUrl).pathname.slice(1));assert.equal(createHash('sha256').update(bytes).digest('hex'),manifest[path]);}
+  for(const imageUrl of imageUrls){const response=await fetch(imageUrl,{signal:AbortSignal.timeout(15000)});assert.equal(response.status,200);const bytes=Buffer.from(await response.arrayBuffer());const path=decodeURIComponent(new URL(imageUrl).pathname.slice(1));assert.equal(createHash('sha256').update(bytes).digest('hex'),manifest[path]||replacementAssets[path]?.sha256);}
   report.checks.push('public_images_sha256');
   const pathsOf=p=>[p.imagen,...p.variantes.flatMap(v=>v.imagenes)].filter(Boolean).map(url=>decodeURIComponent(new URL(url).pathname.slice(1)));
   assert.ok(products.every(p=>pathsOf(p).every(path=>!isExcludedImage(path))),'Removed image still in catalog');
@@ -50,4 +51,3 @@ async function verify() {
  console.log('Public deployment verification:',status,JSON.stringify(report));
 }
 if(process.env.RENDER_EXTERNAL_URL)setTimeout(()=>verify().catch(()=>console.error('Deployment verification could not be recorded')),15000).unref();
-

@@ -1,4 +1,4 @@
-import {isExcludedImage,visibleImages} from './photo-review.js';
+import {productPhoto,supplementalPhoto,variantPhotoPaths} from './photo-replacements.js';
 // Query only the published supplier batch. Never use historical JSON prices as a fallback.
 const productSelect = `
  SELECT p.id AS api_id, p.source_id AS id, p.name AS nombre,
@@ -98,9 +98,11 @@ function smallestPrice(variants) {
 }
 export function serializeProduct(product, { assetUrl, prices }) {
   const reference=smallestPrice(product.variantes);
+  const photo=productPhoto(product);
   return {
     ...product,
-    imagen: product.imagen && !isExcludedImage(product.imagen) ? assetUrl(product.imagen) : null,
+    imagen: photo ? assetUrl(photo.path) : null,
+    imagen_ilustrativa: photo?.illustrative ?? false,
     precio_pesos: prices ? reference?.precio_pesos ?? null : null,
     precio_usd: prices ? reference?.precio_usd ?? null : null,
     precio_codigo_referencia: prices && reference ? formatSupplierCode(reference.codigo) : null,
@@ -111,8 +113,10 @@ export function serializeProduct(product, { assetUrl, prices }) {
   };
 }
 export function serializeVariant(variant, { assetUrl, prices }) {
+  const extra=supplementalPhoto(variant);
   return { ...variant, codigo: formatSupplierCode(variant.codigo), precio_pesos: prices ? variant.precio_pesos : null,
-    precio_usd: prices ? variant.precio_usd : null, imagenes: visibleImages(variant.imagenes).map(assetUrl) };
+    precio_usd: prices ? variant.precio_usd : null, imagenes: variantPhotoPaths(variant).map(assetUrl),
+    imagen_ilustrativa: extra?.illustrative ?? false };
 }
 
 export function normalizeCodeQuery(value) {
@@ -125,5 +129,4 @@ export function formatSupplierCode(value) {
   const code=String(value ?? '').trim();
   return /^\d{1,4}$/.test(code) ? code.padStart(4,'0') : code;
 }
-
 

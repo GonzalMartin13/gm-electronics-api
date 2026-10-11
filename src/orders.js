@@ -1,5 +1,6 @@
 import {createHash,timingSafeEqual,randomUUID} from 'node:crypto';
 import {formatSupplierCode} from './catalog.js';
+import {comboRows} from './combos.js';
 const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const hash=value=>createHash('sha256').update(value).digest('hex');
 export class OrderError extends Error{constructor(message,status=400,code='INVALID_ORDER',details){super(message);Object.assign(this,{status,code,details})}}
@@ -29,13 +30,13 @@ const selectVariants=`SELECT v.variant_id,p.source_id,p.name,p.packaging_origina
 function publicOrder(row){return {id:row.id,numero:'GM-'+String(row.order_number).padStart(6,'0'),created_at:row.created_at,channel:row.channel,invoice:row.invoice,customer:row.customer,items:row.items,subtotal:row.subtotal,iva:row.tax,total:row.total,status:row.status,message:'Solicitud de pedido sujeta a confirmación de GM Electronics.'}}
 export class Orders{
  constructor(pool){this.pool=pool}
- async quote(body){const input=orderInput(body);const {rows}=await this.pool.query(selectVariants,[input.items.map(row=>row.variant_id)]);return calculateQuote(input,rows)}
+ async quote(body){const input=orderInput(body);const ids=input.items.map(row=>row.variant_id);const {rows}=await this.pool.query(selectVariants,[ids]);return calculateQuote(input,[...rows,...comboRows(ids)])}
  async create(body,{accountId=null}={}){
  if(accountId!==null&&!UUID.test(accountId))throw new OrderError('Acceso a la cuenta no válido.',401,'AUTH_REQUIRED');
  const input=orderInput(body,{customer:true});const requestHash=hash(JSON.stringify(accountId?{...input,accountId}:input));const tokenHash=hash(input.access_token);const client=await this.pool.connect();
  try{await client.query('BEGIN');await client.query('SELECT pg_advisory_xact_lock(hashtextextended($1,0))',[input.idempotency_key]);const existing=await client.query('SELECT * FROM gm.orders WHERE idempotency_key=$1',[input.idempotency_key]);
  if(existing.rows.length){if((existing.rows[0].customer_account_id||null)!==accountId||existing.rows[0].request_hash!==requestHash)throw new OrderError('Reintentá preparar el pedido con sus datos actuales.',409,'IDEMPOTENCY_CONFLICT');await client.query('COMMIT');return {order:publicOrder(existing.rows[0]),reused:true}}
- await client.query('SELECT id FROM gm.suppliers ORDER BY id FOR SHARE');const {rows}=await client.query(selectVariants,[input.items.map(row=>row.variant_id)]);const quote=calculateQuote(input,rows);
+ await client.query('SELECT id FROM gm.suppliers ORDER BY id FOR SHARE');const ids=input.items.map(row=>row.variant_id);const {rows}=await client.query(selectVariants,[ids]);const quote=calculateQuote(input,[...rows,...comboRows(ids)]);
  if(quote.signature!==input.quote_signature)throw new OrderError('La información del pedido cambió. Revisala antes de confirmar.',409,'QUOTE_CHANGED',{quote});
  const saved=await client.query(`INSERT INTO gm.orders(id,idempotency_key,request_hash,access_token_hash,channel,invoice,customer,items,subtotal,tax,total,customer_account_id) VALUES($1,$2,$3,$4,$5,$6,$7::jsonb,$8::jsonb,$9,$10,$11,$12) RETURNING *`,[randomUUID(),input.idempotency_key,requestHash,tokenHash,input.channel,input.invoice,JSON.stringify(input.customer),JSON.stringify(quote.items),quote.subtotal,quote.iva,quote.total,accountId]);
  await client.query('COMMIT');return {order:publicOrder(saved.rows[0]),reused:false};

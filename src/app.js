@@ -2,6 +2,7 @@ import {isExcludedImage} from './photo-review.js';
 import express from 'express';
 import {Orders,OrderError} from './orders.js';
 import {Accounts,createIdentityVerifier} from './accounts.js';
+import {combos} from './combos.js';
 import cors from 'cors';
 import helmet from 'helmet';
 import { rateLimit } from 'express-rate-limit';
@@ -70,6 +71,7 @@ export function createApp({ catalog, config, logger=console, orders=new Orders(c
   app.use('/api',rateLimit({windowMs:60000,limit:120,standardHeaders:'draft-8',legacyHeaders:false,message:{error:{code:'RATE_LIMITED',message:'Demasiadas consultas; intentá nuevamente en un minuto'}}}));
   app.use('/api/v1/orders',(req,_res,next)=>{if(req.method==='POST'&&!config.exposeSupplierPrices)return next(new OrderError('Consultanos para preparar tu pedido.',503,'PRICING_NOT_ENABLED'));next()},rateLimit({windowMs:60000,limit:20,standardHeaders:'draft-8',legacyHeaders:false,message:{error:{code:'RATE_LIMITED',message:'Esperá un momento para volver a preparar el pedido.'}}}),express.json({limit:'32kb'}),(_req,res,next)=>{res.set('Cache-Control','no-store');next()});
   app.post('/api/v1/orders/quote',async(req,res)=>res.json({data:await orders.quote(req.body)}));
+  app.get('/api/v1/combos',(_req,res)=>res.set('Cache-Control','no-store').json({data:combos.map(combo=>({...combo,precio_pesos:config.exposeSupplierPrices?combo.precio_pesos:null}))}));
   app.post('/api/v1/orders',async(req,res)=>{
     let accountId=null;
     if(req.get('Authorization'))accountId=(await accounts.ensure(await verifyIdentity(req.get('Authorization')))).id;

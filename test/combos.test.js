@@ -3,6 +3,17 @@ import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
 import {Orders} from '../src/orders.js';
 import {combos} from '../src/combos.js';
+test('pack composition matches the supplied quantities, categories and four-digit codes',()=>{
+ const expected={PackEco:[37,19,8,10,12],PackMid:[50,24,11,15,16],PackPro:[89,42,19,28,16]};
+ for(const pack of combos){
+  assert.deepEqual([pack.units,pack.cables,pack.chargers,pack.audio,pack.productos.length],expected[pack.codigo]);
+  assert.equal(pack.productos.reduce((n,p)=>n+p.cantidad,0),pack.units);
+  assert.equal(new Set(pack.productos.map(p=>p.codigo)).size,pack.productos.length);
+  assert.ok(pack.productos.every(p=>/^\d{4}$/.test(p.codigo)&&Number.isInteger(p.cantidad)&&p.cantidad>0));
+  assert.ok(pack.productos.find(p=>p.codigo==='0052'));
+  if(pack.codigo!=='PackEco')assert.match(pack.productos.find(p=>p.codigo==='5012').nombre,/NG-A910BT.*gris/);
+ }
+});
 test('combo and regular product coexist; server prices override client amounts and quantities count packs',async()=>{
  const regular={variant_id:randomUUID(),name:'Cable',supplier_code:'223',supplier_price_ars:'100.00',supplier_available:true};
  let saved;
@@ -19,3 +30,4 @@ test('all three pack codes and prices have a signed server quote',async()=>{
  const orders=new Orders({query:async()=>({rows:[]})});
  for(const pack of combos){const quote=await orders.quote({items:[{variant_id:pack.id,quantity:1}],invoice:false});assert.equal(quote.items[0].codigo,pack.codigo);assert.equal(quote.total,pack.precio_pesos);assert.equal(quote.signature.length,64)}
 });
+

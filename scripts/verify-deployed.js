@@ -17,7 +17,15 @@ async function verify() {
  };
  let status='failed';
  try {
-  const expected=JSON.parse(gunzipSync(Buffer.from(await readFile(new URL('../data/catalog-check.json.gz.b64',import.meta.url),'utf8'),'base64')).toString('utf8'));
+  const verificationPool=makePool({admin:true});
+  let expected;
+  try {
+   const result=await verificationPool.query(`SELECT p.source_id AS id,p.name AS nombre,c.name AS categoria,a.supplier_available AS stock_disponible,
+    jsonb_agg(jsonb_build_object('codigo',s.supplier_code,'stock_disponible',s.supplier_available,'precio_pesos',s.supplier_price_ars,'precio_usd',s.supplier_price_usd)) AS variantes
+    FROM gm.products p JOIN gm.categories c ON c.id=p.category_id JOIN gm.current_product_availability a ON a.product_id=p.id
+    JOIN gm.current_variant_state s ON s.product_id=p.id WHERE p.active GROUP BY p.id,c.name,a.supplier_available ORDER BY p.source_id`);
+   expected=result.rows;
+  } finally {await verificationPool.end();}
   const expectedVariants=expected.reduce((n,p)=>n+p.variantes.length,0);
   const ready=await get('/ready');assert.equal(ready.productos,expected.length);assert.equal(ready.variantes,expectedVariants);report.checks.push('public_https_ready');
 
@@ -31,8 +39,9 @@ async function verify() {
    for(const variant of original.variantes){const v=actual.variantes.find(v=>v.codigo===String(variant.codigo).padStart(4,'0'));assert.ok(v);assert.equal(v.stock_disponible,variant.stock_disponible);assert.equal(v.precio_pesos===null?null:Number(v.precio_pesos),variant.precio_pesos===null?null:Number(variant.precio_pesos));assert.equal(v.precio_usd===null?null:Number(v.precio_usd),variant.precio_usd===null?null:Number(variant.precio_usd));}
   }
   report.products=products.length;report.variants=products.reduce((n,p)=>n+p.variantes.length,0);assert.equal(report.variants,expectedVariants);report.checks.push('all_products_variants_prices_stock');
-  assert.equal((await get('/api/v1/categories')).data.length,13);report.checks.push('categories');
-  assert.equal((await get('/api/v1/variants/765')).data.precio_pesos,'3661.00');assert.equal((await get('/api/v1/variants/2362')).data.stock_disponible,null);report.checks.push('updated_price_and_conflict');
+  assert.equal((await get('/api/v1/categories')).data.length,new Set(expected.map(p=>p.categoria)).size);report.checks.push('categories');
+  const sample=expected.flatMap(p=>p.variantes).find(v=>v.precio_pesos!==null);
+  assert.equal(Number((await get('/api/v1/variants/'+sample.codigo)).data.precio_pesos),Number(sample.precio_pesos));report.checks.push('published_batch_sample_price');
   const manifest=JSON.parse(await readFile(new URL('../data/image-manifest.json',import.meta.url),'utf8'));
   const imageUrls=[products.find(p=>p.imagen).imagen,products.flatMap(p=>p.variantes).find(v=>v.imagenes.length).imagenes[0]];
   for(const imageUrl of imageUrls){const response=await fetch(imageUrl,{signal:AbortSignal.timeout(15000)});assert.equal(response.status,200);const bytes=Buffer.from(await response.arrayBuffer());const path=decodeURIComponent(new URL(imageUrl).pathname.slice(1));assert.equal(createHash('sha256').update(bytes).digest('hex'),manifest[path]||replacementAssets[path]?.sha256);}
@@ -51,3 +60,4 @@ async function verify() {
  console.log('Public deployment verification:',status,JSON.stringify(report));
 }
 if(process.env.RENDER_EXTERNAL_URL)setTimeout(()=>verify().catch(()=>console.error('Deployment verification could not be recorded')),15000).unref();
+

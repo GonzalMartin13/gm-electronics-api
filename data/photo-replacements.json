@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewed_at": "2026-10-05",
+  "reviewed_at": "2026-10-26",
   "by_code": {
     "1007": {
       "path": "images/web-1007-v1.jpg",
@@ -428,6 +428,70 @@
       "model": "Cable Hdmi Noga 1,4V 20 Metros 2K Y 4 K Ultra Hd Calidad Grueso Doble Filtro",
       "color": null,
       "illustrative": false
+    },
+    "7000": {
+      "path": "images/web-7000-v1.jpg",
+      "source": "importacion.xlsx#Table 81!C76",
+      "source_sha256": "7edaae9ac3bee098d7412405c4ddb638f9033c485799cb53ad6847177ccaa8b6",
+      "model": "TECLADO NETMAK NM-KB586U USB ESPAÑOL 104 TECLAS NEGRO CON CABLE 1,5 MT",
+      "color": null,
+      "illustrative": false
+    },
+    "7001": {
+      "path": "images/web-7001-v1.jpg",
+      "source": "importacion.xlsx#Table 82!C1",
+      "source_sha256": "7edaae9ac3bee098d7412405c4ddb638f9033c485799cb53ad6847177ccaa8b6",
+      "model": "ADAPTADOR RECEPTOR NETMAK NM-BT6 DE AUDIO BLUETOOTH 3,5MM - ALCANCE 10 MT",
+      "color": null,
+      "illustrative": false
+    },
+    "7002": {
+      "path": "images/web-7002-v1.jpg",
+      "source": "importacion.xlsx#Table 82!C13",
+      "source_sha256": "7edaae9ac3bee098d7412405c4ddb638f9033c485799cb53ad6847177ccaa8b6",
+      "model": "ADAPTADOR RECEPTOR NETMAK NM-BT22 DE AUDIO BLUETOOTH 3,0V + EDR 3,5MM",
+      "color": null,
+      "illustrative": false
+    },
+    "7003": {
+      "path": "images/web-7003-v1.jpg",
+      "source": "importacion.xlsx#Table 83!C1",
+      "source_sha256": "7edaae9ac3bee098d7412405c4ddb638f9033c485799cb53ad6847177ccaa8b6",
+      "model": "COOLER FAN NETMAK NG-RING  120 MM RGB GABINETES PC MOD GAMIN",
+      "color": null,
+      "illustrative": false
+    },
+    "7005": {
+      "path": "images/web-7005-v1.jpg",
+      "source": "importacion.xlsx#Table 82!C25",
+      "source_sha256": "7edaae9ac3bee098d7412405c4ddb638f9033c485799cb53ad6847177ccaa8b6",
+      "model": "SOPORTE NETMAK NM-HC23 MAGSAFE DE CELULAR MAGNÉTICO PREMIUM",
+      "color": null,
+      "illustrative": false
+    },
+    "7006": {
+      "path": "images/web-7006-v1.png",
+      "source": "importacion.xlsx#Table 82!C61",
+      "source_sha256": "7edaae9ac3bee098d7412405c4ddb638f9033c485799cb53ad6847177ccaa8b6",
+      "model": "SOPORTE NETMAK NM-HC22 DE CELULAR PARA AUTO IMANTADO MAGNETICO SOPAPA P/VIDRIO",
+      "color": null,
+      "illustrative": false
+    },
+    "7007": {
+      "path": "images/web-7007-v1.jpg",
+      "source": "importacion.xlsx#Table 82!C85",
+      "source_sha256": "7edaae9ac3bee098d7412405c4ddb638f9033c485799cb53ad6847177ccaa8b6",
+      "model": "PARLANTE POTENCIADO NETMAK NM-9025R USB 2.0 RED PC/NOTEBOOK /CELULARES 6W",
+      "color": "ROJO",
+      "illustrative": false
+    },
+    "7008": {
+      "path": "images/web-7008-v1.jpg",
+      "source": "importacion.xlsx#Table 82!C73",
+      "source_sha256": "7edaae9ac3bee098d7412405c4ddb638f9033c485799cb53ad6847177ccaa8b6",
+      "model": "PARLANTE POTENCIADO NETMAK NM-9025B USB 2.0 BLUE PC/NOTEBOOK /CELULARES 6W",
+      "color": "AZUL",
+      "illustrative": false
     }
   },
   "assets": {
@@ -695,6 +759,46 @@
       "bytes": 175049,
       "sha256": "54c9aa34551a0081c11e716f276f2a32ab3a840fa2227d1acd06fca612d3b034",
       "image_source": "https://res.cloudinary.com/dvijjtwty/image/upload/f_auto,q_auto,w_900/v1768935720/cna/auriculares/qcy_blanco.png"
+    },
+    "images/web-7000-v1.jpg": {
+      "sha256": "7aed68b7071c00dbc7ddb8c9688eccbb680ac61e0a0df58493db8f0f51fc4bfa",
+      "bytes": 76588,
+      "image_source": "importacion.xlsx#Table 81!C76"
+    },
+    "images/web-7001-v1.jpg": {
+      "sha256": "a07045a423b4f458222aaca56847449ac36a7dfa689032bc2f7bd7a57f7e075f",
+      "bytes": 17655,
+      "image_source": "importacion.xlsx#Table 82!C1"
+    },
+    "images/web-7002-v1.jpg": {
+      "sha256": "2385d937bb5be15a669bd8d93baa8cc4597bdc5706c2f508215743a112e7b0ce",
+      "bytes": 19834,
+      "image_source": "importacion.xlsx#Table 82!C13"
+    },
+    "images/web-7003-v1.jpg": {
+      "sha256": "862de746b84e519a87699d21d2e72deadce8fc2353f7498430e269f490b68f77",
+      "bytes": 159729,
+      "image_source": "importacion.xlsx#Table 83!C1"
+    },
+    "images/web-7005-v1.jpg": {
+      "sha256": "670c69b09ac9129783aa77739022c17d41780e57f1b1c712a07c358b5d09fc48",
+      "bytes": 30349,
+      "image_source": "importacion.xlsx#Table 82!C25"
+    },
+    "images/web-7006-v1.png": {
+      "sha256": "eaa6e08efe4b052e43bcb88a24b9fe06f940e8dcf5b44fdfa66f07f150a4cae9",
+      "bytes": 232654,
+      "image_source": "importacion.xlsx#Table 82!C61"
+    },
+    "images/web-7007-v1.jpg": {
+      "sha256": "374283eeda02e6f739305fb13d7ed4eb3e0ec412da603f718968c77a2382e227",
+      "bytes": 87276,
+      "image_source": "importacion.xlsx#Table 82!C85"
+    },
+    "images/web-7008-v1.jpg": {
+      "sha256": "89d22c7d02583a0f1adf6e6a468be3e581eb526812f45cbdf4ddbb9a215b483d",
+      "bytes": 102661,
+      "image_source": "importacion.xlsx#Table 82!C73"
     }
   }
 }

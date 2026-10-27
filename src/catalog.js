@@ -27,7 +27,7 @@ export class Catalog {
   async ready() {
     const { rows } = await this.pool.query(`SELECT
       (SELECT count(*)::int FROM gm.products WHERE active) AS productos,
-      (SELECT count(*)::int FROM gm.product_variants) AS variantes,
+      (SELECT count(*)::int FROM gm.product_variants v JOIN gm.products p ON p.id=v.product_id WHERE p.active) AS variantes,
       (SELECT max(document_date)::text FROM gm.import_batches WHERE status='applied') AS fecha_lista`);
     if (!rows[0].productos || !rows[0].fecha_lista) throw new Error('Catalog not imported');
     return rows[0];
@@ -129,4 +129,5 @@ export function formatSupplierCode(value) {
   const code=String(value ?? '').trim();
   return /^\d{1,4}$/.test(code) ? code.padStart(4,'0') : code;
 }
+
 

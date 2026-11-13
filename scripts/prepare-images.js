@@ -17,3 +17,5 @@ for(const [path,sha]of Object.entries(manifest)){
  const destination=new URL('../public/'+path,import.meta.url);await mkdir(new URL('.',destination),{recursive:true});await writeFile(destination,bytes);prepared++;
 }
 console.log('Verified images prepared:',prepared);
+
+await import('./prepare-fastec190-images.js');

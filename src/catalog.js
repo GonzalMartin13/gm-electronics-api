@@ -46,7 +46,7 @@ export class Catalog {
       const code = normalizeCodeQuery(q);
       if (code) {
         const value = bind(code);
-        conditions.push(`EXISTS (SELECT 1 FROM gm.product_variants code WHERE code.product_id=p.id AND code.active AND code.supplier_code=${value})`);
+        conditions.push(`EXISTS (SELECT 1 FROM gm.product_variants code WHERE code.product_id=p.id AND code.supplier_code=${value})`);
       } else {
         const value = bind(q.replace(/[\\%_]/g, '\\$&'));
         conditions.push(`(p.name ILIKE '%' || ${value} || '%' OR p.description ILIKE '%' || ${value} || '%' OR c.name ILIKE '%' || ${value} || '%')`);
@@ -83,7 +83,7 @@ export class Catalog {
   async variant(id) {
     const lookup = normalizeCodeQuery(id) || id;
     const { rows } = await this.pool.query(`SELECT p.source_id FROM gm.product_variants v
-      JOIN gm.products p ON p.id=v.product_id WHERE p.active AND v.active AND (v.id::text=$1 OR v.supplier_code=$1)`, [lookup]);
+      JOIN gm.products p ON p.id=v.product_id WHERE p.active AND (v.id::text=$1 OR v.supplier_code=$1)`, [lookup]);
     if (!rows.length) return null;
     const product = await this.product(rows[0].source_id);
     return { product_id: product.id, ...product.variantes.find(v => v.api_id===id || normalizeCodeQuery(v.codigo)===lookup) };
